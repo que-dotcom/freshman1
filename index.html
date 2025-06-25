@@ -1,16 +1,112 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <title>項目リスト</title>
+<head>   
   <link rel="stylesheet" href="index.css">
+  <meta charset="UTF-8">
+  <title>動きのある山背景サンプル</title>
+
 </head>
 <body>
-  <div class="container">
-    <div class="item">項目 1</div>
-    <div class="item">項目 2</div>
-    <div class="item">項目 3</div>
-    <div class="item">項目 4</div>
-  </div>
+<canvas id="bgCanvas"></canvas>
+
+<div class="container">
+  <a href="#" class="item item1">項目1</a>
+  <a href="#" class="item item2">項目2</a>
+  <a href="#" class="item item3">項目3</a>
+  <a href="#" class="item item4">項目4</a>
+</div>
+
+<script>
+  const canvas = document.getElementById('bgCanvas');
+  const ctx    = canvas.getContext('2d');
+  let W, H;
+
+  // 山レイヤークラス
+  class MountainLayer {
+    constructor({color, speed, peaks, minAmp, maxAmp}) {
+      this.color  = color;     // 塗り色
+      this.speed  = speed;     // 動く速さ
+      this.peaks  = peaks;     // 山の頂点数
+      this.minAmp = minAmp;    // 振幅比(0-1)
+      this.maxAmp = maxAmp;
+      this.offset = 0;         // 描画オフセット
+      this.points = [];
+      this._generate();
+    }
+
+    // 山の頂点座標をウィンドウ幅×２分生成
+    _generate() {
+      const totalW = W * 2;
+      const step   = totalW / (this.peaks - 1);
+      this.points  = [];
+      for (let i = 0; i < this.peaks; i++) {
+        const x = i * step;
+        const amp = this.minAmp + Math.random()*(this.maxAmp - this.minAmp);
+        const y = H * (1 - amp);
+        this.points.push({x, y});
+      }
+    }
+
+    // 描画
+    draw() {
+      ctx.fillStyle = this.color;
+      ctx.beginPath();
+      ctx.moveTo(-this.offset, H);
+      this.points.forEach(p => {
+        ctx.lineTo(p.x - this.offset, p.y);
+      });
+      ctx.lineTo(W * 2 - this.offset, H);
+      ctx.closePath();
+      ctx.fill();
+      // オフセット更新
+      this.offset = (this.offset + this.speed) % W;
+    }
+  }
+
+  let layers;
+
+  // リサイズ＆再生成
+  function onResize() {
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+    // レイヤー初期化
+    layers = [
+      new MountainLayer({
+        color: 'rgba(255,255,255,0.7)',
+        speed: 0.3,
+        peaks: 6,
+        minAmp: 0.15,
+        maxAmp: 0.30
+      }),
+      new MountainLayer({
+        color: 'rgba(255,255,255,0.9)',
+        speed: 0.6,
+        peaks: 8,
+        minAmp: 0.30,
+        maxAmp: 0.50
+      })
+    ];
+  }
+
+  // 毎フレーム描画
+  function animate() {
+    // 青空背景
+    ctx.fillStyle = '#87cefa';
+    ctx.fillRect(0, 0, W, H);
+    // 各レイヤー描画
+    layers.forEach(layer => layer.draw());
+    requestAnimationFrame(animate);
+  }
+
+  window.addEventListener('resize', () => {
+    onResize();
+  });
+
+  // 初期化
+  onResize();
+  animate();
+</script>
+
 </body>
 </html>
+

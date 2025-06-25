@@ -1,23 +1,56 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-  background-color: #e0f7ff; /* 淡い水色 */
+  overflow: hidden;
   font-family: sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  position: relative;
 }
 
+/* ——— 背景Canvas ——— */
+#bgCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+/* ——— 項目コンテナ ——— */
 .container {
-  display: grid;
-  grid-template-columns: repeat(2, 150px);
-  grid-gap: 20px;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 40px 0;
 }
 
+/* ——— 共通スタイル for .item1 ~ .item4 ——— */
 .item {
-  background-color: #c8facc; /* 薄い緑色 */
-  border-radius: 15px;
+  display: block;
+  width: 300px;
   padding: 30px;
+  font-size: 1.5rem;
   text-align: center;
-  font-weight: bold;
-  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 20px; /* 四隅を丸く */
+  text-decoration: none;
+  color: #333;
+  background-color: rgba(255, 255, 255, 0.8);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
+
+.item:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* ——— 個別項目スタイル（任意で色や効果を変えたい場合） ——— */
+.item1 { background-color: rgba(255, 255, 255, 0.85); }
+.item2 { background-color: rgba(245, 245, 255, 0.85); }
+.item3 { background-color: rgba(255, 250, 240, 0.85); }
+.item4 { background-color: rgba(240, 255, 250, 0.85); }
