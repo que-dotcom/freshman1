@@ -1,0 +1,98 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", sans-serif;
+  background: linear-gradient(135deg, #fef9d7, #d299c2);
+  background-size: 400% 400%;
+  animation: bgAnim 15s ease infinite;
+  color: #333;
+}
+
+@keyframes bgAnim {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+main {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+form {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.question {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.options {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 5px;
+}
+
+.options label {
+  flex: 1;
+  text-align: center;
+}
+
+.center {
+  text-align: center;
+  margin-top: 20px;
+}
+
+canvas {
+  margin-top: 40px;
+  background-color: #ffffff;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  display: none;
+}
+
+.result-box {
+  margin-top: 30px;
+  padding: 20px;
+  background-color: #fff8c6;
+  border: 2px solid #f0c000;
+  border-radius: 10px;
+  font-size: 18px;
+  animation: fadeIn 1s ease-in;
+}
+
+.hidden {
+  display: none;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; transform: scale(0.9); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.next-button {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 16px;
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.next-button:hover {
+  background-color: #0056b3;
+}
+
+#radarChart {
+  display: block;
+  margin: 30px auto;
+  border: 1px solid #ccc;
+}
