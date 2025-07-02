@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>緊急時対応WEB</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #fff8f6;
+}
+
+header {
+  background: #b71c1c;
+  color: white;
+  padding: 1em;
+  text-align: center;
+  font-size: 1.8em;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.container {
+  padding: 1em;
+}
+
+.card {
+  background: linear-gradient(to right, #ffcdd2, #ff8a80);
+  border-left: 8px solid #d32f2f;
+  padding: 1em;
+  margin: 1.5em 0;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: scale(1.02);
+}
+
+.card h2 {
+  margin: 0;
+  font-size: 1.3em;
+  color: #b71c1c;
+  font-weight: bold;
+}
+
+.details {
+  display: none;
+  margin-top: 0.8em;
+  font-size: 1em;
+  color: #333;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.details ul {
+  padding-left: 1.2em;
+  list-style-type: square;
+}
+
+.emergency {
+  background: #d32f2f;
+  color: white;
+  padding: 1.5em 1em;
+  text-align: center;
+  margin-top: 3em;
+  border-radius: 12px;
+  font-weight: bold;
+  animation: blink 1.5s infinite;
+}
+
+button {
+  background: #b71c1c;
+  color: white;
+  border: none;
+  padding: 0.8em 1.2em;
+  border-radius: 6px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 0.5em;
+}
+
+button:hover {
+  background: #d32f2f;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+  </style>
+</head>
+<body>
+
+<header>緊急時対応WEB</header>
+
+<div class="container">
+
+  <div class="card" onclick="toggleDetails('sounan')">
+    <h2>山での遭難時の対応</h2>
+    <div class="details" id="sounan">
+      <ul>
+        <li>まずは冷静になる</li>
+        <li>動かず現在地を確認</li>
+        <li>携帯が通じるなら110/119または家族へ連絡</li>
+        <li>ホイッスルや光で居場所を知らせる</li>
+        <li>水分・体温の確保を最優先</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card" onclick="toggleDetails('kasai')">
+    <h2>火災時の対処</h2>
+    <div class="details" id="kasai">
+      <ul>
+        <li>ハンカチや衣類で口を覆う</li>
+        <li>低い姿勢で移動</li>
+        <li>出口を確認して迅速に避難</li>
+        <li>可能なら火元を消火器で対応</li>
+        <li>煙を吸わないよう注意</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card" onclick="toggleDetails('kuma')">
+    <h2>熊・大型動物との遭遇</h2>
+    <div class="details" id="kuma">
+      <ul>
+        <li>出会っても走らない</li>
+        <li>ゆっくり後退し距離を取る</li>
+        <li>音や鈴で事前に存在を知らせる</li>
+        <li>威嚇せず刺激を与えない</li>
+        <li>スプレーがあるなら準備</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card" onclick="toggleDetails('mushi')">
+    <h2>ダニ・スズメバチなどの虫</h2>
+    <div class="details" id="mushi">
+      <ul>
+        <li>長袖長ズボンを着用</li>
+        <li>刺されたらすぐ離れ、安静に</li>
+        <li>スズメバチは黒い色に注意</li>
+        <li>アナフィラキシー症状に注意</li>
+        <li>ダニは無理に取らず医師へ</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card" onclick="toggleDetails('dokubutsu')">
+    <h2>有毒植物・キノコ</h2>
+    <div class="details" id="dokubutsu">
+      <ul>
+        <li>知らない植物・キノコは絶対に口にしない</li>
+        <li>触れた場合は速やかに洗う</li>
+        <li>食後異変があればすぐ病院へ</li>
+        <li>写真を撮って医師に見せると良い</li>
+        <li>症状が出なくても油断しない</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="emergency">
+    <h3>📞 緊急連絡先</h3>
+    <p>警察：110 ／ 消防・救急：119</p>
+    <button onclick="getLocation()">現在地を送信</button>
+    <p id="locationInfo"></p>
+  </div>
+
+</div>
+
+<script>
+  function toggleDetails(id) {
+    const detail = document.getElementById(id);
+    detail.style.display = detail.style.display === 'block' ? 'none' : 'block';
+  }
+
+  function getLocation() {
+    const locInfo = document.getElementById('locationInfo');
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        locInfo.innerHTML = `緯度: ${position.coords.latitude.toFixed(5)}, 経度: ${position.coords.longitude.toFixed(5)}`;
+      }, function() {
+        locInfo.innerHTML = "位置情報が取得できませんでした。";
+      });
+    } else {
+      locInfo.innerHTML = "このブラウザでは位置情報がサポートされていません。";
+    }
+  }
+</script>
+
+<!-- i18nextライブラリ追加 -->
+<script src="https://unpkg.com/i18next@21.9.1/dist/umd/i18next.min.js"></script>
+
+<!-- 言語切替ボタン追加（お好みで位置調整） -->
+<div style="text-align:center; margin-top:1em;">
+  <button onclick="changeLang('ja')">日本語</button>
+  <button onclick="changeLang('en')">English</button>
+</div>
+
+<script>
+  const resources = {
+    en: {
+      translation: {
+        "緊急時対応WEB": "Emergency Response Web",
+        "山での遭難時の対応": "Response to Mountain Distress",
+        "まずは冷静になる": "Stay calm first",
+        "動かず現在地を確認": "Don't move and confirm your location",
+        "携帯が通じるなら110/119または家族へ連絡": "Call 110/119 or family if possible",
+        "ホイッスルや光で居場所を知らせる": "Use a whistle or light to signal your location",
+        "水分・体温の確保を最優先": "Prioritize water and body heat",
+        "火災時の対処": "Response to Fire",
+        "ハンカチや衣類で口を覆う": "Cover your mouth with cloth",
+        "低い姿勢で移動": "Move in a low posture",
+        "出口を確認して迅速に避難": "Find an exit and evacuate quickly",
+        "可能なら火元を消火器で対応": "Use an extinguisher if possible",
+        "煙を吸わないよう注意": "Avoid inhaling smoke",
+        "熊・大型動物との遭遇": "Encounter with Bears or Large Animals",
+        "出会っても走らない": "Do not run if encountered",
+        "ゆっくり後退し距離を取る": "Back away slowly and keep distance",
+        "音や鈴で事前に存在を知らせる": "Make noise or use bells to alert animals",
+        "威嚇せず刺激を与えない": "Do not provoke or threaten",
+        "スプレーがあるなら準備": "Have bear spray ready if available",
+        "ダニ・スズメバチなどの虫": "Ticks and Hornets",
+        "長袖長ズボンを着用": "Wear long sleeves and pants",
+        "刺されたらすぐ離れ、安静に": "If stung, move away and stay calm",
+        "スズメバチは黒い色に注意": "Beware of dark colors around hornets",
+        "アナフィラキシー症状に注意": "Watch for signs of anaphylaxis",
+        "ダニは無理に取らず医師へ": "Do not forcefully remove ticks—see a doctor",
+        "有毒植物・キノコ": "Toxic Plants and Mushrooms",
+        "知らない植物・キノコは絶対に口にしない": "Never eat unknown plants or mushrooms",
+        "触れた場合は速やかに洗う": "Wash immediately if touched",
+        "食後異変があればすぐ病院へ": "See a doctor if symptoms appear after eating",
+        "写真を撮って医師に見せると良い": "Take photos and show them to the doctor",
+        "症状が出なくても油断しない": "Stay alert even if symptoms don’t appear",
+        "📞 緊急連絡先": "📞 Emergency Contacts",
+        "警察：110 ／ 消防・救急：119": "Police: 110 / Fire & Ambulance: 119",
+        "現在地を送信": "Send Current Location",
+        "位置情報が取得できませんでした。": "Could not get location.",
+        "このブラウザでは位置情報がサポートされていません。": "This browser does not support geolocation.",
+        "緯度: ": "Latitude: ",
+        "経度: ": "Longitude: "
+      }
+    }
+  };
+
+  i18next.init({
+    lng: 'ja',
+    debug: false,
+    resources
+  });
+
+  function changeLang(lang) {
+    i18next.changeLanguage(lang, () => {
+      translateAllText();
+    });
+  }
+
+  function translateAllText() {
+    const elements = document.querySelectorAll('body *');
+    elements.forEach(el => {
+      if (el.children.length === 0 && el.innerText.trim()) {
+        // 初回のみオリジナルを保存
+        if (!el.dataset.i18nKey) {
+          el.dataset.i18nKey = el.innerText.trim();
+        }
+        const key = el.dataset.i18nKey;
+        const translated = i18next.t(key);
+        if (translated !== key) {
+          el.innerText = translated;
+        }
+      }
+    });
+  }
+
+  // 初期日本語として翻訳対象を記録
+  window.addEventListener('DOMContentLoaded', () => {
+    translateAllText();
+  });
+
+  // 位置情報翻訳対応
+  const originalGetLocation = getLocation;
+  getLocation = function() {
+    const locInfo = document.getElementById('locationInfo');
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        locInfo.innerHTML = `${i18next.t("緯度: ")}${position.coords.latitude.toFixed(5)}, ${i18next.t("経度: ")}${position.coords.longitude.toFixed(5)}`;
+      }, function() {
+        locInfo.innerHTML = i18next.t("位置情報が取得できませんでした。");
+      });
+    } else {
+      locInfo.innerHTML = i18next.t("このブラウザでは位置情報がサポートされていません。");
+    }
+  }
+</script>
+
+
+</body>
+</html>

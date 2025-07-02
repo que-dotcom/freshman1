@@ -22,7 +22,7 @@ form.addEventListener('submit', function (e) {
     resultBox.innerHTML = `
       <h2>ご注意ください</h2>
       <p>一部の項目で最低評価（1）が選択されました。<br>
-      詳しくお伺いできれば、より良いサービス提供につながります。</p>
+      まずは基礎体力をつけてみてはいかがでしょうか？</p>
       <a href="warning.html" class="next-button">▶ 詳細を見る</a>
     `;
     canvas.style.display = 'none';
@@ -34,15 +34,15 @@ form.addEventListener('submit', function (e) {
   let message = "";
 
   if (total >= 23) {
-    message = "🌟 最高の評価をありがとうございます！とても満足いただけたようです。";
+    message = "🌟 あなたはプロレベルの登山家です！あなたには北海道の難易度の極めて高い山紹介します。";
   } else if (total >= 19) {
-    message = "😊 良い評価ありがとうございます！今後も向上に努めます。";
+    message = "😊 あなたの登山は上級者レベルです！挑戦しがいのある北海道の山を紹介します。";
   } else if (total >= 15) {
-    message = "😐 普通の評価ですね。改善点があればぜひご意見ください。";
+    message = "😐 あなたの登山は中級者レベルです！少し難易度の高い山を紹介します。";
   } else if (total >= 10) {
-    message = "😕 あまりご満足いただけなかったようです。次回改善を目指します。";
+    message = "😕 あなたの登山は初心者～中級者レベルです！基礎を身に付け楽しく登れる山を紹介します。";
   } else {
-    message = "⚠️ 大変申し訳ありません。至急改善に努めさせていただきます。";
+    message = "⚠️ あなたの登山は初心者レベルです！まずは基礎体力をつけられる山を紹介します。";
   }
 
   resultBox.innerHTML = `
