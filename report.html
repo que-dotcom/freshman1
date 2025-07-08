@@ -4,84 +4,111 @@
   <meta charset="UTF-8">
   <title>アンケートフォーム</title>
   <link rel="stylesheet" href="report.css">
+  <script src="https://unpkg.com/i18next@21.9.1/dist/umd/i18next.min.js"></script>
 </head>
 <body>
   <main>
-    <h1>登山適正診断</h1>
+    <h1 data-i18n="h1">
+      登山適正診断
+    </h1>
 
     <form id="surveyForm">
       <div class="question">
-        <p>1. 持久力・体力
-          <br>持久走であなたはどのレベルまで走れますか？
-        </p>
+        <div data-i18n="q1.text">
+          <p>1. 持久力・体力
+            <br>持久走であなたはどのレベルまで走れますか？
+          </p>
+        </div>
         <div class="options">
-          <label><input type="radio" name="q1" value="5" required> ハーフマラソン・フルマラソン完走レベル</label>
-          <label><input type="radio" name="q1" value="4"> 10km以上のランニングを安定して走れるレベル</label>
-          <label><input type="radio" name="q1" value="3"> 5～7kmの持久力を安定して完走できるレベル</label>
-          <label><input type="radio" name="q1" value="2"> 3km走をなんとか完走できるレベル</label>
-          <label><input type="radio" name="q1" value="1"> 100mダッシュできるが1km走ると息切れするレベル</label>
+          <label><input type="radio" name="q1" value="5" required><span data-i18n="q1.a5">ハーフマラソン・フルマラソン完走レベル</span></label>
+          <label><input type="radio" name="q1" value="4"><span data-i18n="q1.a4">10km以上のランニングを安定して走れるレベル</span></label>
+          <label><input type="radio" name="q1" value="3"><span data-i18n="q1.a3">5～7kmの持久力を安定して完走できるレベル</span></label>
+          <label><input type="radio" name="q1" value="2"><span data-i18n="q1.a2">3km走をなんとか完走できるレベル</span></label>
+          <label><input type="radio" name="q1" value="1"><span data-i18n="q1.a1">100mダッシュできるが1km走ると息切れするレベル</span></label>
         </div>
       </div>
 
       <div class="question">
-        <p>2. 技術・装備操作能力
-          <br>新しく未知の分野について調べようをと思い試行錯誤しています、最もあなたに近いレベルはどれですか？
-        </p>
+        <div data-i18n="q2.text">
+          <p>2. 技術・装備操作能力
+            <br>新しく未知の分野について調べようをと思い試行錯誤しています、最もあなたに近いレベルはどれですか？
+          </p>
+        </div>
         <div class="options">
-          <label><input type="radio" name="q2" value="5" required> 新しく知った知識も即座に習得でき応用するレベル</label>
-          <label><input type="radio" name="q2" value="4"> トラブル時も基本知識から自力で解決できるレベル</label>
-          <label><input type="radio" name="q2" value="3"> 新しい知識もマニュアルを見ながらなら問題なくこなせるレベル</label>
-          <label><input type="radio" name="q2" value="2"> 新しい知識を利用したトラブル時の対応が苦手なレベル</label>
-          <label><input type="radio" name="q2" value="1"> マニュアル書いていることなどが理解できないレベル</label>
+          <label><input type="radio" name="q2" value="5" required><span data-i18n="q2.a5">新しく知った知識も即座に習得でき応用するレベル</span></label>
+          <label><input type="radio" name="q2" value="4"><span data-i18n="q2.a4">トラブル時も基本知識から自力で解決できるレベル</span></label>
+          <label><input type="radio" name="q2" value="3"><span data-i18n="q2.a3">新しい知識もマニュアルを見ながらなら問題なくこなせるレベル</span></label>
+          <label><input type="radio" name="q2" value="2"><span data-i18n="q2.a2">新しい知識を利用したトラブル時の対応が苦手なレベル</span></label>
+          <label><input type="radio" name="q2" value="1"><span data-i18n="q2.a1">マニュアル書いていることなどが理解できないレベル</span></label>
         </div>
       </div>
 
       <div class="question">
-        <p>3. 状況判断力
-          <br>人間関係でぎくしゃくしてしまいました...あなたは原因に対してどんなレベルの対応をとりますか？</p>
+        <div data-i18n="q3.text">
+          <p>3. 状況判断力
+            <br>人間関係でぎくしゃくしてしまいました...あなたは原因に対してどんなレベルの対応をとりますか？
+          </p>
+        </div>
         <div class="options">
-          <label><input type="radio" name="q3" value="5" required> 複雑な人間関係や予期せぬトラブルも的確に察知し、最善の解決策を提示出来るレベル</label>
-          <label><input type="radio" name="q3" value="4"> 人間関係の変化に柔軟に対応し、リスクを的確に回避できるレベル</label>
-          <label><input type="radio" name="q3" value="3"> 人間関係で問題や気まずさを感じたら話し合いで解決を図るレベル</label>
-          <label><input type="radio" name="q3" value="2"> 人間関係で小さなトラブルには気づくが、どう対応していいか分からないので放置するレベル</label>
-          <label><input type="radio" name="q3" value="1"> 人間関係でトラブルの芽を見抜くのが苦手なレベル</label>
+          <label><input type="radio" name="q3" value="5" required><span data-i18n="q3.a5">複雑な人間関係や予期せぬトラブルも的確に察知し、最善の解決策を提示出来るレベル</span></label>
+          <label><input type="radio" name="q3" value="4"><span data-i18n="q3.a4">人間関係の変化に柔軟に対応し、リスクを的確に回避できるレベル</span></label>
+          <label><input type="radio" name="q3" value="3"><span data-i18n="q3.a3">人間関係で問題や気まずさを感じたら話し合いで解決を図るレベル</span></label>
+          <label><input type="radio" name="q3" value="2"><span data-i18n="q3.a2">人間関係で小さなトラブルには気づくが、どう対応していいか分からないので放置するレベル</span></label>
+          <label><input type="radio" name="q3" value="1"><span data-i18n="q3.a1">人間関係でトラブルの芽を見抜くのが苦手なレベル</span></label>
         </div>
       </div>
 
       <div class="question">
-        <p>4. 精神力
-          <br>あなたはミスや失敗をしたとき、どのレベルの状態になりやすいですか？
-        </p>
+        <div data-i18n="q4.text">
+          <p>4. 精神力
+            <br>あなたはミスや失敗をしたとき、どのレベルの状態になりやすいですか？
+          </p>
+        </div>
         <div class="options">
-          <label><input type="radio" name="q4" value="5" required> どんな逆境でも落ち着いて対応し、周りに安心感を与えられるレベル</label>
-          <label><input type="radio" name="q4" value="4"> トラブルや困難があっても冷静に対処し、ある程度周囲の人の支えにもなれるレベル</label>
-          <label><input type="radio" name="q4" value="3"> ストレスの多い場面でも何とか踏ん張り、努力を続けることができるレベル</label>
-          <label><input type="radio" name="q4" value="2"> 壁にぶつかるとすぐ投げ出したくなり、問題を先延ばしにしがちレベル</label>
-          <label><input type="radio" name="q4" value="1"> ちょっとしたミスやトラブルで極端に落ち込み、周囲に頼るばかりで自分で立ち直れないレベル</label>
+          <label><input type="radio" name="q4" value="5" required><span data-i18n="q4.a5">どんな逆境でも落ち着いて対応し、周りに安心感を与えられるレベル</span></label>
+          <label><input type="radio" name="q4" value="4"><span data-i18n="q4.a4">トラブルや困難があっても冷静に対処し、ある程度周囲の人の支えにもなれるレベル</span></label>
+          <label><input type="radio" name="q4" value="3"><span data-i18n="q4.a3">ストレスの多い場面でも何とか踏ん張り、努力を続けることができるレベル</span></label>
+          <label><input type="radio" name="q4" value="2"><span data-i18n="q4.a2">壁にぶつかるとすぐ投げ出したくなり、問題を先延ばしにしがちレベル</span></label>
+          <label><input type="radio" name="q4" value="1"><span data-i18n="q4.a1">ちょっとしたミスやトラブルで極端に落ち込み、周囲に頼るばかりで自分で立ち直れないレベル</span></label>
         </div>
       </div>
 
       <div class="question">
-        <p>5. チームワーク力
-          <br>あなたは日常生活で人と話すとき、どんなレベルの会話をしていますか？
-        </p>
+        <div data-i18n="q5.text">
+          <p>5. チームワーク力
+            <br>あなたは日常生活で人と話すとき、どんなレベルの会話をしていますか？
+          </p>
+        </div>
         <div class="options">
-          <label><input type="radio" name="q5" value="5" required> どんな状況でも周りをまとめ、全員の力を最大限に引き出すレベル</label>
-          <label><input type="radio" name="q5" value="4"> 複雑な人間関係をうまくまとめ、チームの雰囲気を良くし、問題解決に導く存在レベル</label>
-          <label><input type="radio" name="q5" value="3"> 意見の違いも話し合いで解決し、円滑に協力し合えるレベル</label>
-          <label><input type="radio" name="q5" value="2"> 友人や同僚とは話せるが、伝えたいことがうまく伝わらず誤解を生みやすいレベル</label>
-          <label><input type="radio" name="q5" value="1"> グループ作業や家庭で自分勝手に動き、他人の意見を聞かず衝突ばかりするレベル</label>
+          <label><input type="radio" name="q5" value="5" required><span data-i18n="q5.a5">どんな状況でも周りをまとめ、全員の力を最大限に引き出すレベル</span></label>
+          <label><input type="radio" name="q5" value="4"><span data-i18n="q5.a4">複雑な人間関係をうまくまとめ、チームの雰囲気を良くし、問題解決に導く存在レベル</span></label>
+          <label><input type="radio" name="q5" value="3"><span data-i18n="q5.a3">意見の違いも話し合いで解決し、円滑に協力し合えるレベル</span></label>
+          <label><input type="radio" name="q5" value="2"><span data-i18n="q5.a2">友人や同僚とは話せるが、伝えたいことがうまく伝わらず誤解を生みやすいレベル</span></label>
+          <label><input type="radio" name="q5" value="1"><span data-i18n="q5.a1">グループ作業や家庭で自分勝手に動き、他人の意見を聞かず衝突ばかりするレベル</span></label>
         </div>
       </div>
 
       <div class="center">
-        <button type="submit">おすすめの北海道の山を見てみる</button>
+        <button type="submit" data-i18n="submit">おすすめの北海道の山を見てみる</button>
       </div>
     </form>
 
+    <div id="lang-switch" style="
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 1000;
+  background: rgba(255,255,255,0.8);
+  padding: 0.5em 1em;
+  border-radius: 10px;
+">
+  <button onclick="changeLang('ja')">日本語</button>
+  <button onclick="changeLang('en')">English</button>
+</div>
+
     <div id="result" class="hidden"></div>
 
-  <canvas id="radarChart" width="500" height="500" style="display: none;"></canvas>
+  <canvas id="radarChart" width="800" height="500" style="display: none;"></canvas>
   </main>
 
   <script src="report.js"></script>

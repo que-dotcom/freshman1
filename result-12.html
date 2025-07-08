@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <link rel="stylesheet" href="result-12.css">
+  <link rel="stylesheet" href="result-12.css">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>紹介ページ12</title>
+  <title data-i18n="page.title">紹介ページ12</title>
 </head>
 <body>
 
   <div class="container">
-    <h1>あなたにおすすめの山は...藻岩山です！</h1>
+    <h1 data-i18n="mountain.title">あなたにおすすめの山は...藻岩山です！</h1>
 
     <div class="image-column">
       <img src="ph_scenic-road-04-2.jpg" alt="画像1">
@@ -17,24 +17,29 @@
     </div>
 
     <ul class="info-list">
-      <li>標高：531m</li>
-      <li>場所：北海道札幌市中央区</li>
-      <li>登山時間：徒歩で登山口から山頂まで約1時間（往復2時間程度）
-        <br>ロープウェイとミニケーブルカー利用で山麓駅から山頂展望台まで約10分</li>
-      <li>アクセス：地下鉄「円山公園駅」からバスで約15分、札幌中心部から登山口まで車で約20分程度</li>
+      <li data-i18n="mountain.height">標高：531m</li>
+      <li data-i18n="mountain.location">場所：北海道札幌市中央区</li>
+      <li data-i18n="mountain.time">
+        登山時間：徒歩で登山口から山頂まで約1時間（往復2時間程度）
+        <br>ロープウェイとミニケーブルカー利用で山麓駅から山頂展望台まで約10分
+      </li>
+      <li data-i18n="mountain.access">アクセス：地下鉄「円山公園駅」からバスで約15分、札幌中心部から登山口まで車で約20分程度</li>
     </ul>
 
     <div class="features">
-      <h2>特徴</h2>
-      <p>・アクセスが非常によく、観光や散歩感覚でも登れる</p>
-      <p>・ロープウェイで楽に登ることもでき、徒歩での登山も整備されている</p>
-      <p>・山頂展望台からの札幌の夜景は「日本新三大夜景」にも選出されている</p>
-      <p>・コースにトイレや案内板も整っていて、子ども連れや高齢者にも人気</p>
+      <h2 data-i18n="features.title">特徴</h2>
+      <p data-i18n="features.point1">・アクセスが非常によく、観光や散歩感覚でも登れる</p>
+      <p data-i18n="features.point2">・ロープウェイで楽に登ることもでき、徒歩での登山も整備されている</p>
+      <p data-i18n="features.point3">・山頂展望台からの札幌の夜景は「日本新三大夜景」にも選出されている</p>
+      <p data-i18n="features.point4">・コースにトイレや案内板も整っていて、子ども連れや高齢者にも人気</p>
     </div>
 
-    <!-- Google Map（埋め込み or API） -->
+    <div id="lang-switch" style="position: fixed; top: 10px; right: 10px; z-index: 1000; background: rgba(255,255,255,0.8); padding: 0.5em 1em; border-radius: 10px;">
+      <button onclick="changeLang('ja')">日本語</button>
+      <button onclick="changeLang('en')">English</button>
+    </div>
+
     <div class="map-container">
-      <!-- ▼ Google Maps Embed API ▼ -->
       <iframe
         src="https://www.google.com/maps?q=藻岩山,北海道&output=embed"
         width="100%"
@@ -42,16 +47,81 @@
         style="border:0;"
         allowfullscreen=""
         loading="lazy">
-    </iframe>
-
+      </iframe>
     </div>
 
-    <!-- ホームページへのリンクボタン -->
     <div class="home-button">
-      <a href="index.html">ホームページを見る</a>
+      <a href="index.html" data-i18n="button.home">ホームページを見る</a>
     </div>
-
   </div>
 
+  <!-- i18next CDN -->
+  <script src="https://unpkg.com/i18next@21.6.16/dist/umd/i18next.min.js"></script>
+  <script>
+    const resources = {
+      ja: {
+        translation: {
+          "page.title": "紹介ページ12",
+          "mountain.title": "あなたにおすすめの山は...藻岩山です！",
+          "mountain.height": "標高：531m",
+          "mountain.location": "場所：北海道札幌市中央区",
+          "mountain.time": "登山時間：徒歩で登山口から山頂まで約1時間（往復2時間程度）<br>ロープウェイとミニケーブルカー利用で山麓駅から山頂展望台まで約10分",
+          "mountain.access": "アクセス：地下鉄「円山公園駅」からバスで約15分、札幌中心部から登山口まで車で約20分程度",
+          "features.title": "特徴",
+          "features.point1": "・アクセスが非常によく、観光や散歩感覚でも登れる",
+          "features.point2": "・ロープウェイで楽に登ることもでき、徒歩での登山も整備されている",
+          "features.point3": "・山頂展望台からの札幌の夜景は「日本新三大夜景」にも選出されている",
+          "features.point4": "・コースにトイレや案内板も整っていて、子ども連れや高齢者にも人気",
+          "button.home": "ホームページを見る"
+        }
+      },
+      en: {
+        translation: {
+          "page.title": "Recommendation Page 12",
+          "mountain.title": "The mountain we recommend for you is... Mt. Moiwa!",
+          "mountain.height": "Height: 531m",
+          "mountain.location": "Location: Chuo Ward, Sapporo, Hokkaido",
+          "mountain.time": "Climbing Time: About 1 hour on foot (round trip ~2 hours)<br>About 10 minutes using ropeway and mini cable car from base station to summit observatory",
+          "mountain.access": "Access: About 15 minutes by bus from Maruyama Koen Station (subway); About 20 minutes by car from central Sapporo",
+          "features.title": "Features",
+          "features.point1": "・Easily accessible, ideal for sightseeing or a casual walk",
+          "features.point2": "・You can use the ropeway or hike via well-maintained trails",
+          "features.point3": "・The night view from the summit observatory is one of Japan's New Top 3 Night Views",
+          "features.point4": "・Restrooms and signboards are available along the trail, popular with families and the elderly",
+          "button.home": "Go to Homepage"
+        }
+      }
+    };
+
+    i18next.init({
+      lng: 'ja',
+      resources,
+      interpolation: {
+        escapeValue: false
+      }
+    }, function(err, t) {
+      if (err) return console.error(err);
+      updateTexts();
+    });
+
+    function updateTexts() {
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        const translated = i18next.t(key);
+        if (el.tagName === 'TITLE') {
+          document.title = translated;
+        } else {
+          el.innerHTML = translated;
+        }
+      });
+    }
+
+    function changeLang(lang) {
+      i18next.changeLanguage(lang, function(err, t) {
+        if (err) return console.error(err);
+        updateTexts();
+      });
+    }
+  </script>
 </body>
 </html>

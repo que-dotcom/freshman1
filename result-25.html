@@ -1,56 +1,113 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <link rel="stylesheet" href="result-25.css">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="result-25.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>紹介ページ25</title>
 </head>
 <body>
 
-  <div class="container">
-    <h1>あなたにおすすめの山は...神威岳南西尾根ルートです！</h1>
+<div class="container">
+  <h1 data-i18n="title">あなたにおすすめの山は...神威岳南西尾根ルートです！</h1>
 
-    <div class="image-column">
-      <img src="84_raw.jpg" alt="画像1">
-      <img src="5fcbeaac960e126d945ab931b1a14ddc.jpg" alt="画像2">
-    </div>
-
-    <ul class="info-list">
-      <li>標高：1848m</li>
-      <li>場所：北海道日高山脈の核心部、平取町と新冠町の境界付近</li>
-      <li>登山時間：アプローチから山頂まで約10～14時間程度（技術的に難しいため慎重なペースを推奨）、南西尾根は痩せ尾根や岩場が多く渡渉も数回ある、ルートは明確ではなく、地図読みとコンパス技術が必要</li>
-      <li>アクセス：平取町側の林道終点付近や新冠町側の登山口</li>
-    </ul>
-
-    <div class="features">
-      <h2>特徴</h2>
-      <p>・バリエーションルートならではの厳しい地形が連続し、クライミング的要素もある</p>
-      <p>・登山道が整備されておらず、地図とコンパス、GPSを駆使した正確な読図能力が求められる</p>
-      <p>・増水時は渡渉が非常に危険になるため、天候や季節の見極めが重要</p>
-      <p>・人の少ないエリアのため、熊鈴やスプレーの携行は必須</p>
-    </div>
-
-    <!-- Google Map（埋め込み or API） -->
-    <div class="map-container">
-      <!-- ▼ Google Maps Embed API ▼ -->
-      <iframe
-        src="https://www.google.com/maps?q=神威岳南西尾根,北海道&output=embed"
-        width="100%"
-        height="400"
-        style="border:0;"
-        allowfullscreen=""
-        loading="lazy">
-    </iframe>
-
-    </div>
-
-    <!-- ホームページへのリンクボタン -->
-    <div class="home-button">
-      <a href="index.html">ホームページを見る</a>
-    </div>
-
+  <div class="image-column">
+    <img src="84_raw.jpg" alt="画像1" />
+    <img src="5fcbeaac960e126d945ab931b1a14ddc.jpg" alt="画像2" />
   </div>
+
+  <ul class="info-list">
+    <li data-i18n="height">標高：1848m</li>
+    <li data-i18n="location">場所：北海道日高山脈の核心部、平取町と新冠町の境界付近</li>
+    <li data-i18n="time">登山時間：アプローチから山頂まで約10～14時間程度（技術的に難しいため慎重なペースを推奨）、南西尾根は痩せ尾根や岩場が多く渡渉も数回ある、ルートは明確ではなく、地図読みとコンパス技術が必要</li>
+    <li data-i18n="access">アクセス：平取町側の林道終点付近や新冠町側の登山口</li>
+  </ul>
+
+  <div class="features">
+    <h2 data-i18n="featuresTitle">特徴</h2>
+    <p data-i18n="f1">・バリエーションルートならではの厳しい地形が連続し、クライミング的要素もある</p>
+    <p data-i18n="f2">・登山道が整備されておらず、地図とコンパス、GPSを駆使した正確な読図能力が求められる</p>
+    <p data-i18n="f3">・増水時は渡渉が非常に危険になるため、天候や季節の見極めが重要</p>
+    <p data-i18n="f4">・人の少ないエリアのため、熊鈴やスプレーの携行は必須</p>
+  </div>
+
+  <!-- 言語切替ボタン -->
+  <div id="lang-switch" style="position: fixed; top: 10px; right: 10px; background: white; padding: 0.5em 1em; border-radius: 10px;">
+    <button onclick="changeLang('ja')">日本語</button>
+    <button onclick="changeLang('en')">English</button>
+  </div>
+
+  <!-- Google Map -->
+  <div class="map-container">
+    <iframe
+      src="https://www.google.com/maps?q=神威岳南西尾根,北海道&output=embed"
+      width="100%"
+      height="400"
+      style="border:0;"
+      allowfullscreen=""
+      loading="lazy"></iframe>
+  </div>
+
+  <!-- ホームページへのリンク -->
+  <div class="home-button">
+    <a href="index.html" data-i18n="home">ホームページを見る</a>
+  </div>
+</div>
+
+<!-- i18next -->
+<script src="https://unpkg.com/i18next@21.6.14/dist/umd/i18next.min.js"></script>
+<script>
+  const resources = {
+    ja: {
+      translation: {
+        title: "あなたにおすすめの山は...神威岳南西尾根ルートです！",
+        height: "標高：1848m",
+        location: "場所：北海道日高山脈の核心部、平取町と新冠町の境界付近",
+        time: "登山時間：アプローチから山頂まで約10～14時間程度（技術的に難しいため慎重なペースを推奨）、南西尾根は痩せ尾根や岩場が多く渡渉も数回ある、ルートは明確ではなく、地図読みとコンパス技術が必要",
+        access: "アクセス：平取町側の林道終点付近や新冠町側の登山口",
+        featuresTitle: "特徴",
+        f1: "・バリエーションルートならではの厳しい地形が連続し、クライミング的要素もある",
+        f2: "・登山道が整備されておらず、地図とコンパス、GPSを駆使した正確な読図能力が求められる",
+        f3: "・増水時は渡渉が非常に危険になるため、天候や季節の見極めが重要",
+        f4: "・人の少ないエリアのため、熊鈴やスプレーの携行は必須",
+        home: "ホームページを見る"
+      }
+    },
+    en: {
+      translation: {
+        title: "Your recommended mountain is... Kamui-dake Southwest Ridge Route!",
+        height: "Altitude: 1848m",
+        location: "Location: Core area of Hidaka Mountains, near the border of Biratori and Niikappu towns, Hokkaido",
+        time: "Climbing time: About 10 to 14 hours from approach to summit (recommended to proceed carefully due to technical difficulty). The southwest ridge has narrow ridges, many rocky sections, and several river crossings. The route is unclear, requiring map reading and compass skills.",
+        access: "Access: Trailheads near the end of forest roads on Biratori side or Niikappu side",
+        featuresTitle: "Features",
+        f1: "・Challenging terrain unique to variation routes, including climbing elements",
+        f2: "・Trails are not maintained; accurate map reading, compass, and GPS skills are essential",
+        f3: "・River crossings can be very dangerous when water levels rise, so weather and seasonal judgement is critical",
+        f4: "・Bear bells and spray are essential due to the low number of visitors",
+        home: "Go to Homepage"
+      }
+    }
+  };
+
+  function updateContent() {
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+      const key = el.getAttribute("data-i18n");
+      el.innerHTML = i18next.t(key);
+    });
+  }
+
+  function changeLang(lng) {
+    i18next.changeLanguage(lng, updateContent);
+  }
+
+  i18next.init({
+    lng: "ja",
+    debug: false,
+    resources,
+    interpolation: { escapeValue: false }
+  }, updateContent);
+</script>
 
 </body>
 </html>

@@ -1,15 +1,22 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <link rel="stylesheet" href="result-19.css">
+  <link rel="stylesheet" href="result-19.css">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>紹介ページ19</title>
+  <title data-i18n="title">紹介ページ19</title>
+  <script src="https://unpkg.com/i18next@21.6.14/i18next.min.js"></script>
+  <script src="https://unpkg.com/i18next-browser-languagedetector@6.1.3/i18nextBrowserLanguageDetector.min.js"></script>
+  <script src="https://unpkg.com/i18next-http-backend@1.4.1/i18nextHttpBackend.min.js"></script>
 </head>
 <body>
+  <div id="lang-switch" style="position: fixed; top: 10px; right: 10px; z-index: 1000; background: rgba(255,255,255,0.8); padding: 0.5em 1em; border-radius: 10px;">
+    <button onclick="changeLang('ja')">日本語</button>
+    <button onclick="changeLang('en')">English</button>
+  </div>
 
   <div class="container">
-    <h1>あなたにおすすめの山は...黒岳〜北鎮岳縦走です！</h1>
+    <h1 data-i18n="recommendation">あなたにおすすめの山は...黒岳〜北鎮岳縦走です！</h1>
 
     <div class="image-column">
       <img src="968_raw.jpg" alt="画像1">
@@ -17,50 +24,90 @@
     </div>
 
     <ul class="info-list">
-      <li>標高：黒岳が1984m、北鎮岳が2,244m</li>
-      <li>場所：大雪山国立公園</li>
-      <li>登山時間：ロープウェイ＋リフトで五合目まで → 徒歩で黒岳山頂まで約1.5時間、黒岳〜北鎮岳ピストンで往復で約6〜7時間
-        <br>※黒岳→北鎮岳→旭岳 への 縦走（大雪山主稜線縦走） は1泊2日または2泊3日が一般的
-      </li>
-      <li>アクセス：車で旭川市から約1時間半、または黒岳ロープウェイ（片道約7分）＋リフト（片道約15分）、</li>
+      <li data-i18n="altitude">標高：黒岳が1984m、北鎮岳が2,244m</li>
+      <li data-i18n="location">場所：大雪山国立公園</li>
+      <li data-i18n="time">登山時間：ロープウェイ＋リフトで五合目まで → 徒歩で黒岳山頂まで約1.5時間、黒岳〜北鎮岳ピストンで往復で約6〜7時間<br>※黒岳→北鎮岳→旭岳 への 縦走（大雪山主稜線縦走） は1泊2日または2泊3日が一般的</li>
+      <li data-i18n="access">アクセス：車で旭川市から約1時間半、または黒岳ロープウェイ（片道約7分）＋リフト（片道約15分）</li>
     </ul>
 
     <div class="features">
-      <h2>特徴</h2>
-      <p>・大雪山系の核心部に入り、2,000m超の稜線歩きが堪能できる</p>
-      <p>・避難小屋・キャンプ指定地はあるが、天候急変やガスに注意</p>
-      <p>・エゾノツガザクラ、チングルマなど花の百名山としても有名</p>
-      <p>・トムラウシ以上に、体力・ルート判断力・天候リスク管理が必要</p>
+      <h2 data-i18n="features_title">特徴</h2>
+      <p data-i18n="feature1">・大雪山系の核心部に入り、2,000m超の稜線歩きが堪能できる</p>
+      <p data-i18n="feature2">・避難小屋・キャンプ指定地はあるが、天候急変やガスに注意</p>
+      <p data-i18n="feature3">・エゾノツガザクラ、チングルマなど花の百名山としても有名</p>
+      <p data-i18n="feature4">・トムラウシ以上に、体力・ルート判断力・天候リスク管理が必要</p>
     </div>
 
-    <!-- Google Map（埋め込み or API） -->
     <div class="map-container">
-      <!-- ▼ Google Maps Embed API ▼ -->
-      <iframe
-        src="https://www.google.com/maps?q=黒岳,北海道&output=embed"
-        width="100%"
-        height="400"
-        style="border:0;"
-        allowfullscreen=""
-        loading="lazy">
-    </iframe>
-
-
-    </div><iframe
-        src="https://www.google.com/maps?q=北鎮岳,北海道&output=embed"
-        width="100%"
-        height="400"
-        style="border:0;"
-        allowfullscreen=""
-        loading="lazy">
-    </iframe>
-
-    <!-- ホームページへのリンクボタン -->
-    <div class="home-button">
-      <a href="index.html">ホームページを見る</a>
+      <iframe src="https://www.google.com/maps?q=黒岳,北海道&output=embed" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+    <div class="map-container">
+      <iframe src="https://www.google.com/maps?q=北鎮岳,北海道&output=embed" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
     </div>
 
+    <div class="home-button">
+      <a href="index.html" data-i18n="home_link">ホームページを見る</a>
+    </div>
   </div>
 
+  <script>
+    const resources = {
+      ja: {
+        translation: {
+          title: "紹介ページ19",
+          recommendation: "あなたにおすすめの山は...黒岳〜北鎮岳縦走です！",
+          altitude: "標高：黒岳が1984m、北鎮岳が2,244m",
+          location: "場所：大雪山国立公園",
+          time: "登山時間：ロープウェイ＋リフトで五合目まで → 徒歩で黒岳山頂まで約1.5時間、黒岳〜北鎮岳ピストンで往復で約6〜7時間<br>※黒岳→北鎮岳→旭岳 への 縦走（大雪山主稜線縦走） は1泊2日または2泊3日が一般的",
+          access: "アクセス：車で旭川市から約1時間半、または黒岳ロープウェイ（片道約7分）＋リフト（片道約15分）",
+          features_title: "特徴",
+          feature1: "・大雪山系の核心部に入り、2,000m超の稜線歩きが堪能できる",
+          feature2: "・避難小屋・キャンプ指定地はあるが、天候急変やガスに注意",
+          feature3: "・エゾノツガザクラ、チングルマなど花の百名山としても有名",
+          feature4: "・トムラウシ以上に、体力・ルート判断力・天候リスク管理が必要",
+          home_link: "ホームページを見る"
+        }
+      },
+      en: {
+        translation: {
+          title: "Introduction Page 19",
+          recommendation: "Recommended mountain for you: Mt. Kurodake to Mt. Hokkaidake Traverse!",
+          altitude: "Altitude: Mt. Kurodake - 1,984m, Mt. Hokkaidake - 2,244m",
+          location: "Location: Daisetsuzan National Park",
+          time: "Climbing Time: Ropeway + lift to 5th station → approx. 1.5 hours to Kurodake summit on foot. Round-trip to Hokkaidake takes about 6–7 hours.<br>* Full traverse from Kurodake → Hokkaidake → Mt. Asahidake usually takes 1–2 nights.",
+          access: "Access: About 1.5 hours by car from Asahikawa City or take Kurodake Ropeway (7 mins) + lift (15 mins)",
+          features_title: "Features",
+          feature1: "・Experience trekking along 2000m+ ridgelines in the core of the Daisetsuzan range",
+          feature2: "・There are shelters and campsites, but beware of sudden weather changes and fog",
+          feature3: "・Famous for alpine flowers like Ezo-no-Tsugazakura and Chinguruma",
+          feature4: "・More demanding than Mt. Tomuraushi: requires stamina, route judgment, and risk management",
+          home_link: "Go to Homepage"
+        }
+      }
+    };
+
+    i18next.init({
+      lng: 'ja',
+      debug: false,
+      resources,
+      interpolation: {
+        escapeValue: false
+      }
+    }, function(err, t) {
+      updateContent();
+    });
+
+    function updateContent() {
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        el.innerHTML = i18next.t(el.getAttribute('data-i18n'));
+      });
+    }
+
+    function changeLang(lng) {
+      i18next.changeLanguage(lng, () => {
+        updateContent();
+      });
+    }
+  </script>
 </body>
 </html>

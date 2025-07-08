@@ -56,3 +56,17 @@ body {
 .item2 { background-color: rgba(245, 245, 255, 0.85); }
 .item3 { background-color: rgba(255, 250, 240, 0.85); }
 .item4 { background-color: rgba(240, 255, 250, 0.85); }
+
+@media (max-width: 600px) {
+  #lang-switch {
+    top: auto;
+    bottom: 10px;
+    left: 10px;
+    right: auto;
+    flex-direction: column;
+  }
+
+  #lang-switch button {
+    margin: 0.2em 0;
+  }
+}

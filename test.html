@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>テスト</title>
+  <script src="https://unpkg.com/i18next@21.6.14/dist/umd/i18next.min.js"></script>
+</head>
+<body>
+  <h1 data-i18n="title">北海道の山脈を探求しよう！</h1>
+  <p data-i18n="risk">緊急時対応について</p>
+  <p data-i18n="evaluation">口コミ評価</p>
+  <p data-i18n="item3">項目3</p>
+  <p data-i18n="recommend">自分に合った北海道の山を探してみよう！</p>
+
+  <div style="text-align:center; margin-top:1em;">
+    <button onclick="changeLang('ja')">日本語</button>
+    <button onclick="changeLang('en')">English</button>
+  </div>
+
+  <script>
+    const resources = {
+      en: {
+        translation: {
+          "title": "Explore the Mountain Ranges of Hokkaido!",
+          "risk": "Emergency Response Information",
+          "evaluation": "",
+          "item3": "Item 3",
+          "recommend": "Find the Best Mountain in Hokkaido for You!"
+        }
+      },
+      ja: {
+        translation: {
+          "title": "北海道の山脈を探求しよう！",
+          "risk": "緊急時対応について",
+          "evaluation": "口コミ評価",
+          "item3": "項目3",
+          "recommend": "自分に合った北海道の山を探してみよう！"
+        }
+      }
+    };
+
+    i18next.init({
+      lng: 'ja',
+      debug: false,
+      resources
+    }, function(err, t) {
+      updateContent();
+    });
+
+    function changeLang(lang) {
+      i18next.changeLanguage(lang, function(err, t) {
+        if (err) return console.error('言語切り替えエラー:', err);
+        updateContent();
+      });
+    }
+
+    function updateContent() {
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        el.textContent = i18next.t(key);  // ← 安定版
+      });
+    }
+  </script>
+</body>
+</html>

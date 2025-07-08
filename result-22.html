@@ -1,56 +1,114 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <link rel="stylesheet" href="result-22.css">
+  <link rel="stylesheet" href="result-22.css">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>紹介ページ22</title>
 </head>
 <body>
 
-  <div class="container">
-    <h1>あなたにおすすめの山は...カムイエクウチカウシ山です！</h1>
+<div class="container">
+  <h1 data-i18n="title">あなたにおすすめの山は...カムイエクウチカウシ山です！</h1>
 
-    <div class="image-column">
-      <img src="000087794.jpg" alt="画像1">
-      <img src="P7290146.jpg" alt="画像2">
-    </div>
-
-    <ul class="info-list">
-      <li>標高：1979m</li>
-      <li>場所：北海道日高山脈の核心部、平取町と新冠町の境界付近</li>
-      <li>登山時間：日帰りはほぼ不可能で、2泊以上の縦走が必要（渡渉多数、急斜面、道迷いのリスク高い）</li>
-      <li>アクセス：幌尻岳登山のとよぬか山荘や平取町</li>
-    </ul>
-
-    <div class="features">
-      <h2>特徴</h2>
-      <p>・複雑な地形と道迷いのリスクが高く、高度な登山技術・読図能力が必須</p>
-      <p>・増水時には渡渉が非常に危険、水量の判断や装備が必須</p>
-      <p>・人里離れた秘境、ヒグマに遭遇する可能性があるため熊対策が重要</p>
-      <p>・登山者が非常に少なく、手つかずの自然が広がる</p>
-    </div>
-
-    <!-- Google Map（埋め込み or API） -->
-    <div class="map-container">
-      <!-- ▼ Google Maps Embed API ▼ -->
-      <iframe
-        src="https://www.google.com/maps?q=カムイエクウチカウシ山,北海道&output=embed"
-        width="100%"
-        height="400"
-        style="border:0;"
-        allowfullscreen=""
-        loading="lazy">
-    </iframe>
-
-    </div>
-
-    <!-- ホームページへのリンクボタン -->
-    <div class="home-button">
-      <a href="index.html">ホームページを見る</a>
-    </div>
-
+  <div class="image-column">
+    <img src="000087794.jpg" alt="画像1">
+    <img src="P7290146.jpg" alt="画像2">
   </div>
+
+  <ul class="info-list">
+    <li data-i18n="height">標高：1979m</li>
+    <li data-i18n="location">場所：北海道日高山脈の核心部、平取町と新冠町の境界付近</li>
+    <li data-i18n="time">登山時間：日帰りはほぼ不可能で、2泊以上の縦走が必要（渡渉多数、急斜面、道迷いのリスク高い）</li>
+    <li data-i18n="access">アクセス：幌尻岳登山のとよぬか山荘や平取町</li>
+  </ul>
+
+  <div class="features">
+    <h2 data-i18n="featuresTitle">特徴</h2>
+    <p data-i18n="f1">・複雑な地形と道迷いのリスクが高く、高度な登山技術・読図能力が必須</p>
+    <p data-i18n="f2">・増水時には渡渉が非常に危険、水量の判断や装備が必須</p>
+    <p data-i18n="f3">・人里離れた秘境、ヒグマに遭遇する可能性があるため熊対策が重要</p>
+    <p data-i18n="f4">・登山者が非常に少なく、手つかずの自然が広がる</p>
+  </div>
+
+  <!-- 言語切替ボタン -->
+  <div id="lang-switch" style="position: fixed; top: 10px; right: 10px; z-index: 999; background: #fff; padding: 0.5em 1em; border-radius: 10px;">
+    <button onclick="changeLang('ja')">日本語</button>
+    <button onclick="changeLang('en')">English</button>
+  </div>
+
+  <!-- Google Map -->
+  <div class="map-container">
+    <iframe
+      src="https://www.google.com/maps?q=カムイエクウチカウシ山,北海道&output=embed"
+      width="100%"
+      height="400"
+      style="border:0;"
+      allowfullscreen=""
+      loading="lazy">
+    </iframe>
+  </div>
+
+  <!-- ホームページへのリンクボタン -->
+  <div class="home-button">
+    <a href="index.html" data-i18n="home">ホームページを見る</a>
+  </div>
+</div>
+
+<!-- i18next ライブラリ & 初期化 -->
+<script src="https://unpkg.com/i18next@21.6.14/dist/umd/i18next.min.js"></script>
+<script>
+  const resources = {
+    ja: {
+      translation: {
+        title: "あなたにおすすめの山は...カムイエクウチカウシ山です！",
+        height: "標高：1979m",
+        location: "場所：北海道日高山脈の核心部、平取町と新冠町の境界付近",
+        time: "登山時間：日帰りはほぼ不可能で、2泊以上の縦走が必要（渡渉多数、急斜面、道迷いのリスク高い）",
+        access: "アクセス：幌尻岳登山のとよぬか山荘や平取町",
+        featuresTitle: "特徴",
+        f1: "・複雑な地形と道迷いのリスクが高く、高度な登山技術・読図能力が必須",
+        f2: "・増水時には渡渉が非常に危険、水量の判断や装備が必須",
+        f3: "・人里離れた秘境、ヒグマに遭遇する可能性があるため熊対策が重要",
+        f4: "・登山者が非常に少なく、手つかずの自然が広がる",
+        home: "ホームページを見る"
+      }
+    },
+    en: {
+      translation: {
+        title: "Your recommended mountain is... Mount Kamui-e-kuchikaushi!",
+        height: "Altitude: 1,979 m",
+        location: "Location: Core of the Hidaka Mountains, on the border of Biratori and Niikappu towns in Hokkaido",
+        time: "Climbing Time: Day hike is almost impossible. Requires a 2+ day traverse with multiple river crossings, steep slopes, and high risk of getting lost",
+        access: "Access: From Toyonuka Mountain Lodge or Biratori Town (used also for Mt. Poroshiri)",
+        featuresTitle: "Features",
+        f1: "・Complex terrain with high risk of getting lost — advanced mountain skills and map reading required",
+        f2: "・River crossings can be extremely dangerous during high water — water level judgment and proper gear are critical",
+        f3: "・A remote wilderness where brown bear encounters are possible — bear precautions are essential",
+        f4: "・Very few climbers; untouched natural landscapes abound",
+        home: "Go to Homepage"
+      }
+    }
+  };
+
+  function updateContent() {
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+      const key = el.getAttribute("data-i18n");
+      el.innerHTML = i18next.t(key);
+    });
+  }
+
+  function changeLang(lng) {
+    i18next.changeLanguage(lng, updateContent);
+  }
+
+  i18next.init({
+    lng: "ja",
+    debug: false,
+    resources,
+    interpolation: { escapeValue: false }
+  }, updateContent);
+</script>
 
 </body>
 </html>

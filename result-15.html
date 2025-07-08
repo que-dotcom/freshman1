@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <link rel="stylesheet" href="result-15.css">
+  <link rel="stylesheet" href="result-15.css">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>紹介ページ15</title>
+  <title data-i18n="page.title">紹介ページ15</title>
 </head>
 <body>
 
   <div class="container">
-    <h1>あなたにおすすめの山は...樽前山です！</h1>
+    <h1 data-i18n="mountain.title">あなたにおすすめの山は...樽前山です！</h1>
 
     <div class="image-column">
       <img src="98_raw.jpg" alt="画像1">
@@ -17,23 +17,26 @@
     </div>
 
     <ul class="info-list">
-      <li>標高：1041m</li>
-      <li>場所：北海道苫小牧市と千歳市の境界、支笏湖の南側</li>
-      <li>登山時間：山頂まで 登り約1時間、下り約40分</li>
-      <li>アクセス：公共交通機関ではアクセスしづらいため、車・レンタカーがおすすめ（札幌市から約1時間30分程度）</li>
+      <li data-i18n="mountain.height">標高：1041m</li>
+      <li data-i18n="mountain.location">場所：北海道苫小牧市と千歳市の境界、支笏湖の南側</li>
+      <li data-i18n="mountain.time">登山時間：山頂まで 登り約1時間、下り約40分</li>
+      <li data-i18n="mountain.access">アクセス：公共交通機関ではアクセスしづらいため、車・レンタカーがおすすめ（札幌市から約1時間30分程度）</li>
     </ul>
 
     <div class="features">
-      <h2>特徴</h2>
-      <p>・噴火口や溶岩ドームを間近に見られる貴重な体験ができるが、登山道は平坦で短め</p>
-      <p>・1,000mを超える山の中では最短クラスの所要時間で、景色もよく達成感がある</p>
-      <p>・山頂からは支笏湖や風不死岳（ふっぷしだけ）などの山々が美しく見渡せる</p>
-      <p>・夏のチングルマ、秋の紅葉と、四季を通して風景が変化するのも魅力</p>
+      <h2 data-i18n="features.title">特徴</h2>
+      <p data-i18n="features.point1">・噴火口や溶岩ドームを間近に見られる貴重な体験ができるが、登山道は平坦で短め</p>
+      <p data-i18n="features.point2">・1,000mを超える山の中では最短クラスの所要時間で、景色もよく達成感がある</p>
+      <p data-i18n="features.point3">・山頂からは支笏湖や風不死岳（ふっぷしだけ）などの山々が美しく見渡せる</p>
+      <p data-i18n="features.point4">・夏のチングルマ、秋の紅葉と、四季を通して風景が変化するのも魅力</p>
     </div>
 
-    <!-- Google Map（埋め込み or API） -->
+    <div id="lang-switch" style="position: fixed; top: 10px; right: 10px; z-index: 1000; background: rgba(255,255,255,0.8); padding: 0.5em 1em; border-radius: 10px;">
+      <button onclick="changeLang('ja')">日本語</button>
+      <button onclick="changeLang('en')">English</button>
+    </div>
+
     <div class="map-container">
-      <!-- ▼ Google Maps Embed API ▼ -->
       <iframe
         src="https://www.google.com/maps?q=樽前山,北海道&output=embed"
         width="100%"
@@ -41,16 +44,81 @@
         style="border:0;"
         allowfullscreen=""
         loading="lazy">
-    </iframe>
-
+      </iframe>
     </div>
 
-    <!-- ホームページへのリンクボタン -->
     <div class="home-button">
-      <a href="index.html">ホームページを見る</a>
+      <a href="index.html" data-i18n="button.home">ホームページを見る</a>
     </div>
 
   </div>
+
+  <!-- i18next CDN -->
+  <script src="https://unpkg.com/i18next@21.6.16/dist/umd/i18next.min.js"></script>
+  <script>
+    const resources = {
+      ja: {
+        translation: {
+          "page.title": "紹介ページ15",
+          "mountain.title": "あなたにおすすめの山は...樽前山です！",
+          "mountain.height": "標高：1041m",
+          "mountain.location": "場所：北海道苫小牧市と千歳市の境界、支笏湖の南側",
+          "mountain.time": "登山時間：山頂まで 登り約1時間、下り約40分",
+          "mountain.access": "アクセス：公共交通機関ではアクセスしづらいため、車・レンタカーがおすすめ（札幌市から約1時間30分程度）",
+          "features.title": "特徴",
+          "features.point1": "・噴火口や溶岩ドームを間近に見られる貴重な体験ができるが、登山道は平坦で短め",
+          "features.point2": "・1,000mを超える山の中では最短クラスの所要時間で、景色もよく達成感がある",
+          "features.point3": "・山頂からは支笏湖や風不死岳（ふっぷしだけ）などの山々が美しく見渡せる",
+          "features.point4": "・夏のチングルマ、秋の紅葉と、四季を通して風景が変化するのも魅力",
+          "button.home": "ホームページを見る"
+        }
+      },
+      en: {
+        translation: {
+          "page.title": "Recommendation Page 15",
+          "mountain.title": "The mountain we recommend for you is... Mt. Tarumae!",
+          "mountain.height": "Height: 1041m",
+          "mountain.location": "Location: Border of Tomakomai and Chitose cities, south of Lake Shikotsu, Hokkaido",
+          "mountain.time": "Climbing Time: ~1 hour up, ~40 minutes down",
+          "mountain.access": "Access: Difficult via public transport, so car/rental recommended (~1.5 hours from Sapporo)",
+          "features.title": "Features",
+          "features.point1": "・Experience rare views of a volcanic crater and lava dome; short and flat trails",
+          "features.point2": "・One of the shortest climbs among mountains over 1000m, with rewarding views",
+          "features.point3": "・Panoramic views of Lake Shikotsu and nearby peaks like Mt. Fuppushi",
+          "features.point4": "・Enjoy seasonal scenery: Chinguruma flowers in summer, vibrant autumn colors, and more",
+          "button.home": "Go to Homepage"
+        }
+      }
+    };
+
+    i18next.init({
+      lng: 'ja',
+      resources,
+      interpolation: { escapeValue: false }
+    }, function(err, t) {
+      if (err) return console.error(err);
+      updateTexts();
+    });
+
+    function updateTexts() {
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        const translated = i18next.t(key);
+        if (el.tagName === 'TITLE') {
+          document.title = translated;
+        } else {
+          el.innerHTML = translated;
+        }
+      });
+    }
+
+    function changeLang(lang) {
+      i18next.changeLanguage(lang, function(err, t) {
+        if (err) return console.error(err);
+        updateTexts();
+      });
+    }
+  </script>
 
 </body>
 </html>

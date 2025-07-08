@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>1週間でできる対策</title>
+<style>
+  body {
+    font-family: "Yu Gothic", "ヒラギノ角ゴシック", "Hiragino Kaku Gothic Pro", Meiryo, sans-serif;
+    line-height: 1.6;
+    margin: 2rem auto;
+    max-width: 1100px;
+  }
+  #lang-switch {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background: white;
+    padding: 0.5em 1em;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    z-index: 1000;
+  }
+  #lang-switch button {
+    margin-left: 0.5em;
+    padding: 0.3em 0.8em;
+    font-size: 14px;
+    cursor: pointer;
+  }
+
+  main {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  section {
+    display: flex;
+    gap: 1.2rem;
+    padding: 1rem 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.07);
+    align-items: flex-start;
+  }
+
+  section h2 {
+    margin-top: 0;
+    margin-bottom: 0.7rem;
+    border-bottom: 3px solid;
+    padding-bottom: 0.3rem;
+    color: #333;
+  }
+
+  section ul, section p {
+    margin: 0.3rem 0 0.7rem 1.5rem;
+    flex: 1;
+  }
+
+  section ul {
+    padding-left: 1rem;
+  }
+
+  section li {
+    margin-bottom: 0.4rem;
+  }
+
+  section img {
+    width: 150px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 0 7px rgba(0,0,0,0.12);
+    flex-shrink: 0;
+    object-fit: cover;
+  }
+
+  /* セクションごとのカラー */
+
+  /* 持久力・体力 */
+  #section1 {
+    background-color: #e6f0ff;
+    border-left: 6px solid #4a90e2;
+  }
+  #section1 h2 {
+    border-color: #4a90e2;
+  }
+
+  /* 技術・装備操作能力 */
+  #section2 {
+    background-color: #fff4e6;
+    border-left: 6px solid #f5a623;
+  }
+  #section2 h2 {
+    border-color: #f5a623;
+  }
+
+  /* 状況判断力 */
+  #section3 {
+    background-color: #e6fff4;
+    border-left: 6px solid #7ed321;
+  }
+  #section3 h2 {
+    border-color: #7ed321;
+  }
+
+  /* 精神力 */
+  #section4 {
+    background-color: #fff0f5;
+    border-left: 6px solid #bd10e0;
+  }
+  #section4 h2 {
+    border-color: #bd10e0;
+  }
+
+  /* チームワーク力 */
+  #section5 {
+    background-color: #fff8e1;
+    border-left: 6px solid #f8e71c;
+  }
+  #section5 h2 {
+    border-color: #f8e71c;
+  }
+
+  /* レスポンシブ対応 */
+  @media (max-width: 768px) {
+    section {
+      flex-direction: column;
+      align-items: center;
+    }
+    section img {
+      width: 80%;
+      max-width: 280px;
+      margin-bottom: 1rem;
+    }
+    section ul, section p {
+      margin-left: 0;
+      text-align: center;
+    }
+  }
+
+  .home-button {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.home-button a {
+  background-color: #c7c7c7; /* 薄めグレーのボタン */
+  color: #E0E0E0;
+  text-decoration: none;
+  padding: 15px 30px;
+  border-radius: 30px;
+  font-size: 1.2rem;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: background-color 0.3s ease;
+}
+
+.home-button a:hover {
+  background-color: #2E2E2E; /* ホバー時に濃いグレー */
+}
+
+</style>
+</head>
+<body>
+
+<div id="lang-switch">
+  <button onclick="changeLang('ja')">日本語</button>
+  <button onclick="changeLang('en')">English</button>
+</div>
+
+<main>
+  <h1 data-i18n="mainTitle">～1週間でできる対策～</h1>
+
+  <section id="section1">
+    <img src="211119_skip_01.png" alt="持久力・体力のイメージ" />
+    <div>
+      <h2 data-i18n="section1Title">持久力・体力</h2>
+      <ul>
+        <li data-i18n="endurance1">毎日30分程度のウォーキングやジョギング</li>
+      </ul>
+      <p data-i18n="endurance1desc">慣れていなくても、まずは毎日続けることを目標にします。坂道があれば積極的に利用すると効果的です。</p>
+
+      <ul>
+        <li data-i18n="endurance2">階段の上り下り</li>
+      </ul>
+      <p data-i18n="endurance2desc">エレベーターやエスカレーターを使わず、意識的に階段を使うようにします。通勤や買い物中に取り入れられます。</p>
+
+      <ul>
+        <li data-i18n="endurance3">水分補給の意識化</li>
+      </ul>
+      <p data-i18n="endurance3desc">持久力維持には十分な水分補給が不可欠です。こまめに水を飲む習慣をつけましょう。</p>
+
+      <ul>
+        <li data-i18n="endurance4">バランスの取れた食事</li>
+      </ul>
+      <p data-i18n="endurance4desc">特に炭水化物はエネルギー源として重要です。無理な食事制限はせず、しっかり栄養を摂ることを心がけます。</p>
+    </div>
+  </section>
+
+  <section id="section2">
+    <img src="210302_notepc.png" alt="技術・装備操作能力のイメージ" />
+    <div>
+      <h2 data-i18n="section2Title">技術・装備操作能力</h2>
+      <ul>
+        <li data-i18n="tech1">マニュアルを読む前に「目的」と「ゴール」を明確にする</li>
+      </ul>
+      <p data-i18n="tech1desc">何のためにマニュアルを読むのか、読み終えたらどうなりたいのかを最初に考えます。</p>
+
+      <ul>
+        <li data-i18n="tech2">キーワードを書き出す</li>
+      </ul>
+      <p data-i18n="tech2desc">重要だと思われる単語やフレーズをメモに取りながら読みます。</p>
+
+      <ul>
+        <li data-i18n="tech3">段落ごとに要約する</li>
+      </ul>
+      <p data-i18n="tech3desc">一つの段落を読み終えたら、自分なりの言葉で短く要約する練習をします。</p>
+
+      <ul>
+        <li data-i18n="tech4">図やイラストを積極的に利用する</li>
+      </ul>
+      <p data-i18n="tech4desc">マニュアルに図があれば、それと文章を照らし合わせながら理解を深めます。自分で簡単な図を書いてみるのも有効です。</p>
+
+      <ul>
+        <li data-i18n="tech5">不明点はすぐに質問する習慣をつける</li>
+      </ul>
+      <p data-i18n="tech5desc">登山中に分からないことがあれば、ためらわずに経験者に質問する準備をしておきましょう。</p>
+    </div>
+  </section>
+
+  <section id="section3">
+    <img src="ill_trips_200302_01.png" alt="状況判断力のイメージ" />
+    <div>
+      <h2 data-i18n="section3Title">状況判断力</h2>
+      <ul>
+        <li data-i18n="judgment1">相手の表情や仕草を意識的に観察する</li>
+      </ul>
+      <p data-i18n="judgment1desc">会話中に相手の目の動き、手の動き、姿勢などを普段よりも意識して見るようにします。</p>
+
+      <ul>
+        <li data-i18n="judgment2">相手の言葉だけでなく「感情」にも注目する</li>
+      </ul>
+      <p data-i18n="judgment2desc">「今、相手はどんな気持ちなのだろう？」と想像する練習をします。</p>
+
+      <ul>
+        <li data-i18n="judgment3">相槌やあいづちのバリエーションを増やす</li>
+      </ul>
+      <p data-i18n="judgment3desc">「へぇ」「なるほど」「そうなんですね」など、バリエーションを持たせることで、相手が話しやすくなる場合があります。</p>
+
+      <ul>
+        <li data-i18n="judgment4">オープンクエスチョンを意識的に使う</li>
+      </ul>
+      <p data-i18n="judgment4desc">「どう思いますか？」のように相手に考えや意見を尋ねることで、本音や不満に気づきやすくなります。</p>
+    </div>
+  </section>
+
+  <section id="section4">
+    <img src="201230_compassion-2_02.png" alt="精神力のイメージ" />
+    <div>
+      <h2 data-i18n="section4Title">精神力</h2>
+      <ul>
+        <li data-i18n="mental1">「事実」と「感情」を区別する</li>
+      </ul>
+      <p data-i18n="mental1desc">ミスやトラブルが起きた時、「何が起きたか」という事実と、「それに対して自分がどう感じているか」という感情を分けて考える練習をします。</p>
+
+      <ul>
+        <li data-i18n="mental2">「最悪のシナリオ」と「最善のシナリオ」を考えてみる</li>
+      </ul>
+      <p data-i18n="mental2desc">落ち込んだ時に、起こりうる最悪の事態と、そこから立ち直る最善の道を想像し、対策を考えることで冷静になれます。</p>
+
+      <ul>
+        <li data-i18n="mental3">小さな成功体験を積み重ねる</li>
+      </ul>
+      <p data-i18n="mental3desc">どんなに小さなことでも、「できた！」という経験を意識的に増やします。達成感を味わうことで自己肯定感が上がります。</p>
+
+      <ul>
+        <li data-i18n="mental4">頼れる人に相談する「タイミング」を意識する</li>
+      </ul>
+      <p data-i18n="mental4desc">すべてを自分で抱え込まず、信頼できる人に相談することは重要です。ただし、自分で考えられる範囲で一度整理してから相談する習慣をつけましょう。</p>
+    </div>
+  </section>
+
+  <section id="section5">
+    <img src="221108_three_peoples_tanding_talking.png" alt="チームワーク力のイメージ" />
+    <div>
+      <h2 data-i18n="section5Title">チームワーク力</h2>
+      <ul>
+        <li data-i18n="team1">相手の意見を最後まで聞く練習をする</li>
+      </ul>
+      <p data-i18n="team1desc">途中で遮らず、相手が話し終えるまで耳を傾けることを徹底します。</p>
+
+      <ul>
+        <li data-i18n="team2">「私メッセージ」を使う</li>
+      </ul>
+      <p data-i18n="team2desc">相手を非難するような「あなたメッセージ」（例：「あなたはいつも～」）ではなく、「私は～だと感じた」「私は～だと思う」といった「私メッセージ」を使って自分の意見を伝えます。</p>
+
+      <ul>
+        <li data-i18n="team3">相手の意見の良い点を見つける</li>
+      </ul>
+      <p data-i18n="team3desc">まずは相手の意見のどこが良いのか、どこに共感できるのかを探すように心がけます。</p>
+
+      <ul>
+        <li data-i18n="team4">共通の目標を再確認する</li>
+      </ul>
+      <p data-i18n="team4desc">グループや家族で行動する際、何のために協力するのか、最終的な目標は何かを共有することで、意見の衝突を減らせます。</p>
+
+      <ul>
+        <li data-i18n="team5">自分の意見を伝える前に「質問」を挟む</li>
+      </ul>
+      <p data-i18n="team5desc">「～についてどう思いますか？」「他に何か良いアイデアはありますか？」と相手の意見を引き出すことから始めることで、スムーズな話し合いにつながります。</p>
+    </div>
+  </section>
+</main>
+
+<script src="https://unpkg.com/i18next@21.6.14/dist/umd/i18next.min.js"></script>
+<script>
+  const resources = {
+    ja: {
+      translation: {
+        mainTitle: "～1週間でできる対策～",
+        section1Title: "持久力・体力",
+        endurance1: "毎日30分程度のウォーキングやジョギング",
+        endurance1desc: "慣れていなくても、まずは毎日続けることを目標にします。坂道があれば積極的に利用すると効果的です。",
+        endurance2: "階段の上り下り",
+        endurance2desc: "エレベーターやエスカレーターを使わず、意識的に階段を使うようにします。通勤や買い物中に取り入れられます。",
+        endurance3: "水分補給の意識化",
+        endurance3desc: "持久力維持には十分な水分補給が不可欠です。こまめに水を飲む習慣をつけましょう。",
+        endurance4: "バランスの取れた食事",
+        endurance4desc: "特に炭水化物はエネルギー源として重要です。無理な食事制限はせず、しっかり栄養を摂ることを心がけます。",
+        section2Title: "技術・装備操作能力",
+        tech1: "マニュアルを読む前に「目的」と「ゴール」を明確にする",
+        tech1desc: "何のためにマニュアルを読むのか、読み終えたらどうなりたいのかを最初に考えます。",
+        tech2: "キーワードを書き出す",
+        tech2desc: "重要だと思われる単語やフレーズをメモに取りながら読みます。",
+        tech3: "段落ごとに要約する",
+        tech3desc: "一つの段落を読み終えたら、自分なりの言葉で短く要約する練習をします。",
+        tech4: "図やイラストを積極的に利用する",
+        tech4desc: "マニュアルに図があれば、それと文章を照らし合わせながら理解を深めます。自分で簡単な図を書いてみるのも有効です。",
+        tech5: "不明点はすぐに質問する習慣をつける",
+        tech5desc: "登山中に分からないことがあれば、ためらわずに経験者に質問する準備をしておきましょう。",
+        section3Title: "状況判断力",
+        judgment1: "相手の表情や仕草を意識的に観察する",
+        judgment1desc: "会話中に相手の目の動き、手の動き、姿勢などを普段よりも意識して見るようにします。",
+        judgment2: "相手の言葉だけでなく「感情」にも注目する",
+        judgment2desc: "「今、相手はどんな気持ちなのだろう？」と想像する練習をします。",
+        judgment3: "相槌やあいづちのバリエーションを増やす",
+        judgment3desc: "「へぇ」「なるほど」「そうなんですね」など、バリエーションを持たせることで、相手が話しやすくなる場合があります。",
+        judgment4: "オープンクエスチョンを意識的に使う",
+        judgment4desc: "「どう思いますか？」のように相手に考えや意見を尋ねることで、本音や不満に気づきやすくなります。",
+        section4Title: "精神力",
+        mental1: "「事実」と「感情」を区別する",
+        mental1desc: "ミスやトラブルが起きた時、「何が起きたか」という事実と、「それに対して自分がどう感じているか」という感情を分けて考える練習をします。",
+        mental2: "「最悪のシナリオ」と「最善のシナリオ」を考えてみる",
+        mental2desc: "落ち込んだ時に、起こりうる最悪の事態と、そこから立ち直る最善の道を想像し、対策を考えることで冷静になれます。",
+        mental3: "小さな成功体験を積み重ねる",
+        mental3desc: "どんなに小さなことでも、「できた！」という経験を意識的に増やします。達成感を味わうことで自己肯定感が上がります。",
+        mental4: "頼れる人に相談する「タイミング」を意識する",
+        mental4desc: "すべてを自分で抱え込まず、信頼できる人に相談することは重要です。ただし、自分で考えられる範囲で一度整理してから相談する習慣をつけましょう。",
+        section5Title: "チームワーク力",
+        team1: "相手の意見を最後まで聞く練習をする",
+        team1desc: "途中で遮らず、相手が話し終えるまで耳を傾けることを徹底します。",
+        team2: "「私メッセージ」を使う",
+        team2desc: "相手を非難するような「あなたメッセージ」（例：「あなたはいつも～」）ではなく、「私は～だと感じた」「私は～だと思う」といった「私メッセージ」を使って自分の意見を伝えます。",
+        team3: "相手の意見の良い点を見つける",
+        team3desc: "まずは相手の意見のどこが良いのか、どこに共感できるのかを探すように心がけます。",
+        team4: "共通の目標を再確認する",
+        team4desc: "グループや家族で行動する際、何のために協力するのか、最終的な目標は何かを共有することで、意見の衝突を減らせます。",
+        team5: "自分の意見を伝える前に「質問」を挟む",
+        team5desc: "「～についてどう思いますか？」「他に何か良いアイデアはありますか？」と相手の意見を引き出すことから始めることで、スムーズな話し合いにつながります。"
+      }
+    },
+    en: {
+      translation: {
+        mainTitle: "~Measures You Can Take in One Week~",
+        section1Title: "Endurance and Physical Fitness",
+        endurance1: "Walking or jogging about 30 minutes every day",
+        endurance1desc: "Even if you are not used to it, aim to continue every day at first. Using hills actively is effective.",
+        endurance2: "Climbing stairs",
+        endurance2desc: "Try to consciously use stairs instead of elevators or escalators. You can incorporate it during commuting or shopping.",
+        endurance3: "Conscious hydration",
+        endurance3desc: "Adequate hydration is essential to maintain endurance. Make it a habit to drink water frequently.",
+        endurance4: "Balanced diet",
+        endurance4desc: "Carbohydrates are especially important as an energy source. Avoid extreme dieting and focus on getting proper nutrition.",
+        section2Title: "Technical and Equipment Handling Skills",
+        tech1: "Clarify the 'purpose' and 'goal' before reading manuals",
+        tech1desc: "Think first about why you are reading the manual and what you want to achieve after finishing.",
+        tech2: "Write down keywords",
+        tech2desc: "While reading, take notes of words or phrases you find important.",
+        tech3: "Summarize each paragraph",
+        tech3desc: "After reading one paragraph, practice briefly summarizing it in your own words.",
+        tech4: "Actively use diagrams and illustrations",
+        tech4desc: "If there are diagrams in the manual, compare them with the text to deepen understanding. Drawing simple diagrams yourself can also be effective.",
+        tech5: "Get into the habit of asking questions immediately about unclear points",
+        tech5desc: "If you don't understand something while climbing, be prepared to ask experienced people without hesitation.",
+        section3Title: "Situational Judgment",
+        judgment1: "Consciously observe the other person's facial expressions and gestures",
+        judgment1desc: "During conversation, pay more attention than usual to the person's eye movements, hand gestures, posture, etc.",
+        judgment2: "Focus not only on words but also on 'emotions'",
+        judgment2desc: "Practice imagining, 'What kind of feelings does the other person have now?'",
+        judgment3: "Increase variety in backchannel responses",
+        judgment3desc: "Using varied responses like 'Oh,' 'I see,' or 'Really?' can make the other person feel more comfortable talking.",
+        judgment4: "Consciously use open-ended questions",
+        judgment4desc: "By asking questions like 'What do you think?' you can more easily notice true feelings or complaints.",
+        section4Title: "Mental Strength",
+        mental1: "Distinguish between 'facts' and 'emotions'",
+        mental1desc: "When mistakes or troubles happen, practice separating 'what happened' (facts) from 'how you feel about it' (emotions).",
+        mental2: "Think about the 'worst scenario' and the 'best scenario'",
+        mental2desc: "When feeling down, imagine the worst possible situation and the best way to recover from it to calm yourself.",
+        mental3: "Accumulate small successes",
+        mental3desc: "Increase your experiences of 'I did it!' even for small things intentionally. This helps improve self-esteem.",
+        mental4: "Be conscious of the timing to consult reliable people",
+        mental4desc: "Don't keep everything to yourself; consulting trusted people is important. However, make it a habit to organize your thoughts before asking.",
+        section5Title: "Teamwork",
+        team1: "Practice listening to others' opinions until the end",
+        team1desc: "Make sure not to interrupt and listen until the other person finishes speaking.",
+        team2: "Use 'I-messages'",
+        team2desc: "Instead of blaming 'you-messages' (e.g., 'You always...'), use 'I-messages' like 'I feel...' or 'I think...' to express your opinion.",
+        team3: "Find good points in others' opinions",
+        team3desc: "Try to find what is good or what you sympathize with in the other's opinion first.",
+        team4: "Reconfirm common goals",
+        team4desc: "When acting as a group or family, sharing why you cooperate and what your final goal is reduces conflicts.",
+        team5: "Insert 'questions' before expressing your opinion",
+        team5desc: "Start by eliciting opinions with questions like 'What do you think about ~?' or 'Any other good ideas?' for smoother discussions."
+      }
+    }
+  };
+
+  function updateContent() {
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+      const key = el.getAttribute("data-i18n");
+      el.innerHTML = i18next.t(key);
+    });
+  }
+
+  function changeLang(lng) {
+    i18next.changeLanguage(lng, updateContent);
+  }
+
+  i18next.init({
+    lng: "ja",
+    debug: false,
+    resources,
+    interpolation: { escapeValue: false }
+  }, updateContent);
+</script>
+
+<div class="home-button">
+    <a href="index.html" data-i18n="home">ホームページを見る</a>
+  </div>
+</div>
+</body>
+</html>

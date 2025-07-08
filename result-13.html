@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <link rel="stylesheet" href="result-13.css">
+  <link rel="stylesheet" href="result-13.css">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>紹介ページ13</title>
+  <title data-i18n="page.title">紹介ページ13</title>
 </head>
 <body>
 
   <div class="container">
-    <h1>あなたにおすすめの山は...恵山です！</h1>
+    <h1 data-i18n="mountain.title">あなたにおすすめの山は...恵山です！</h1>
 
     <div class="image-column">
       <img src="2014050800075_hk_docs_2014050800075_files_kakougen.jpg" alt="画像1">
@@ -17,23 +17,26 @@
     </div>
 
     <ul class="info-list">
-      <li>標高：618m</li>
-      <li>場所：北海道函館市東部の恵山半島</li>
-      <li>登山時間：登山口から山頂なで約1時間（往復約2時間）</li>
-      <li>アクセス：函館市中心部から車で約40分、函館市内から路線バスでアクセス可能（便数少なめのため注意）</li>
+      <li data-i18n="mountain.height">標高：618m</li>
+      <li data-i18n="mountain.location">場所：北海道函館市東部の恵山半島</li>
+      <li data-i18n="mountain.time">登山時間：登山口から山頂なで約1時間（往復約2時間）</li>
+      <li data-i18n="mountain.access">アクセス：函館市中心部から車で約40分、函館市内から路線バスでアクセス可能（便数少なめのため注意）</li>
     </ul>
 
     <div class="features">
-      <h2>特徴</h2>
-      <p>・火山活動の跡地を間近に見られ、火山ファンにも人気</p>
-      <p>・所要時間が短く、初心者でもチャレンジしやすい</p>
-      <p>・津軽海峡や函館市街、周囲の海岸線が一望できる</p>
-      <p>・原生林や野鳥観察も楽しめ、春から秋まで四季折々の自然が美しい</p>
+      <h2 data-i18n="features.title">特徴</h2>
+      <p data-i18n="features.point1">・火山活動の跡地を間近に見られ、火山ファンにも人気</p>
+      <p data-i18n="features.point2">・所要時間が短く、初心者でもチャレンジしやすい</p>
+      <p data-i18n="features.point3">・津軽海峡や函館市街、周囲の海岸線が一望できる</p>
+      <p data-i18n="features.point4">・原生林や野鳥観察も楽しめ、春から秋まで四季折々の自然が美しい</p>
     </div>
 
-    <!-- Google Map（埋め込み or API） -->
+    <div id="lang-switch" style="position: fixed; top: 10px; right: 10px; z-index: 1000; background: rgba(255,255,255,0.8); padding: 0.5em 1em; border-radius: 10px;">
+      <button onclick="changeLang('ja')">日本語</button>
+      <button onclick="changeLang('en')">English</button>
+    </div>
+
     <div class="map-container">
-      <!-- ▼ Google Maps Embed API ▼ -->
       <iframe
         src="https://www.google.com/maps?q=恵山,北海道&output=embed"
         width="100%"
@@ -41,16 +44,81 @@
         style="border:0;"
         allowfullscreen=""
         loading="lazy">
-    </iframe>
-
+      </iframe>
     </div>
 
-    <!-- ホームページへのリンクボタン -->
     <div class="home-button">
-      <a href="index.html">ホームページを見る</a>
+      <a href="index.html" data-i18n="button.home">ホームページを見る</a>
     </div>
 
   </div>
+
+  <!-- i18next CDN -->
+  <script src="https://unpkg.com/i18next@21.6.16/dist/umd/i18next.min.js"></script>
+  <script>
+    const resources = {
+      ja: {
+        translation: {
+          "page.title": "紹介ページ13",
+          "mountain.title": "あなたにおすすめの山は...恵山です！",
+          "mountain.height": "標高：618m",
+          "mountain.location": "場所：北海道函館市東部の恵山半島",
+          "mountain.time": "登山時間：登山口から山頂なで約1時間（往復約2時間）",
+          "mountain.access": "アクセス：函館市中心部から車で約40分、函館市内から路線バスでアクセス可能（便数少なめのため注意）",
+          "features.title": "特徴",
+          "features.point1": "・火山活動の跡地を間近に見られ、火山ファンにも人気",
+          "features.point2": "・所要時間が短く、初心者でもチャレンジしやすい",
+          "features.point3": "・津軽海峡や函館市街、周囲の海岸線が一望できる",
+          "features.point4": "・原生林や野鳥観察も楽しめ、春から秋まで四季折々の自然が美しい",
+          "button.home": "ホームページを見る"
+        }
+      },
+      en: {
+        translation: {
+          "page.title": "Recommendation Page 13",
+          "mountain.title": "The mountain we recommend for you is... Mt. Esan!",
+          "mountain.height": "Height: 618m",
+          "mountain.location": "Location: Esan Peninsula, Eastern Hakodate, Hokkaido",
+          "mountain.time": "Climbing Time: About 1 hour to the summit (round trip ~2 hours)",
+          "mountain.access": "Access: About 40 minutes by car from central Hakodate, or via local bus (limited service)",
+          "features.title": "Features",
+          "features.point1": "・See volcanic activity remains up close – popular with volcano fans",
+          "features.point2": "・Short hiking time – easy for beginners",
+          "features.point3": "・Panoramic views of the Tsugaru Strait, Hakodate City, and coastline",
+          "features.point4": "・Beautiful natural scenery and birds from spring to autumn",
+          "button.home": "Go to Homepage"
+        }
+      }
+    };
+
+    i18next.init({
+      lng: 'ja',
+      resources,
+      interpolation: { escapeValue: false }
+    }, function(err, t) {
+      if (err) return console.error(err);
+      updateTexts();
+    });
+
+    function updateTexts() {
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        const translated = i18next.t(key);
+        if (el.tagName === 'TITLE') {
+          document.title = translated;
+        } else {
+          el.innerHTML = translated;
+        }
+      });
+    }
+
+    function changeLang(lang) {
+      i18next.changeLanguage(lang, function(err, t) {
+        if (err) return console.error(err);
+        updateTexts();
+      });
+    }
+  </script>
 
 </body>
 </html>
