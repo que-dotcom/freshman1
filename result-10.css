@@ -75,18 +75,3 @@ ul.info-list li {
       justify-content: center;
       margin-top: 40px;
     }
-
-    .home-button a {
-      background-color: #f7b6c2;
-      color: white;
-      text-decoration: none;
-      padding: 15px 30px;
-      border-radius: 30px;
-      font-size: 1.2rem;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-      transition: background-color 0.3s ease;
-    }
-
-    .home-button a:hover {
-      background-color: #e89aad;
-    }

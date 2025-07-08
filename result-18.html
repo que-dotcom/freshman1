@@ -6,6 +6,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title data-i18n="page.title">紹介ページ18</title>
   <script src="https://unpkg.com/i18next@21.6.3/i18next.min.js"></script>
+  <style>
+    .review-list {
+      margin-top: 2em;
+      padding: 1em;
+      background: #fff7f7;
+      color: #333;
+      border-top: 2px solid #b71c1c;
+      border-radius: 8px;
+    }
+
+    .review-item {
+      margin-bottom: 1em;
+      background: #fff;
+      color: #333;
+      padding: 1em;
+      border-radius: 6px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+  </style>
 </head>
 <body>
   <div class="container">
@@ -49,6 +68,10 @@
 
     <div class="home-button">
       <a href="index.html" data-i18n="homepage">ホームページを見る</a>
+    </div>
+
+    <div class="review-list" id="review-list">
+      <h2>みんなの口コミ</h2>
     </div>
   </div>
 
@@ -108,6 +131,44 @@
         updateTexts();
       });
     }
+
+    function displayReviews() {
+      const container = document.getElementById("review-list");
+      const key = "review_data_result-18";
+      const data = JSON.parse(localStorage.getItem(key) || "[]");
+
+      if (data.length === 0) {
+        container.innerHTML += "<p>まだ口コミが投稿されていません。</p>";
+        return;
+      }
+
+      data.forEach((item, index) => {
+        const div = document.createElement("div");
+        div.className = "review-item";
+        const stars = "★".repeat(item.rating) + "☆".repeat(5 - item.rating);
+        const date = new Date(item.date).toLocaleString();
+
+        div.innerHTML = `
+          <p><strong>${stars}</strong> - <em>${item.name}</em> <span style="color:gray;">(${date})</span></p>
+          <p>${item.comment}</p>
+          <button onclick="deleteReview(${index})" style="color: red;">&#128465; 削除</button>
+          <hr>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function deleteReview(index) {
+      const key = "review_data_result-18";
+      const data = JSON.parse(localStorage.getItem(key) || "[]");
+      if (confirm("この口コミを削除しますか？")) {
+        data.splice(index, 1);
+        localStorage.setItem(key, JSON.stringify(data));
+        location.reload();
+      }
+    }
+
+    window.addEventListener("DOMContentLoaded", displayReviews);
   </script>
 </body>
 </html>

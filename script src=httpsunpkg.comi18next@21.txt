@@ -16,3 +16,73 @@
 </div>
 
 全く同じ要領で以下のコードにi18nextによって日本語と英語が切り替え可能なようにしてください
+
+こちらにも内容を変えずに上記の変更点をすべて書き加えて下さい
+
+color: #333;
+
+<style>
+    .review-list {
+  margin-top: 2em;
+  padding: 1em;
+  color: #333;
+  background: #fff7f7;
+  border-top: 2px solid #b71c1c;
+  border-radius: 8px;
+}
+
+.review-item {
+  margin-bottom: 1em;
+  background: #fff;
+  color: #333;
+  padding: 1em;
+  border-radius: 6px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+  </style>
+
+<!-- ▼ 口コミ表示エリア ▼ -->
+<div class="review-list" id="review-list">
+  <h2>みんなの口コミ</h2>
+</div>
+
+
+// ▼ 口コミ読み込み表示機能 ▼
+function displayReviews() {
+  const container = document.getElementById("review-list");
+  const key = "review_data_result-19";
+  const data = JSON.parse(localStorage.getItem(key) || "[]");
+
+  if (data.length === 0) {
+    container.innerHTML += "<p>まだ口コミが投稿されていません。</p>";
+    return;
+  }
+
+  data.forEach((item, index) => {
+    const div = document.createElement("div");
+    div.className = "review-item";
+    const stars = "★".repeat(item.rating) + "☆".repeat(5 - item.rating);
+    const date = new Date(item.date).toLocaleString();
+
+    div.innerHTML = `
+      <p><strong>${stars}</strong> - <em>${item.name}</em> <span style="color:gray;">(${date})</span></p>
+      <p>${item.comment}</p>
+      <button onclick="deleteReview(${index})" style="color: red;">🗑 削除</button>
+      <hr>
+    `;
+    container.appendChild(div);
+  });
+}
+
+function deleteReview(index) {
+  const key = "review_data_result-19";
+  const data = JSON.parse(localStorage.getItem(key) || "[]");
+  if (confirm("この口コミを削除しますか？")) {
+    data.splice(index, 1);
+    localStorage.setItem(key, JSON.stringify(data));
+    location.reload();
+  }
+}
+
+window.addEventListener("DOMContentLoaded", displayReviews);

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>口コミ投稿</title>
+  <link rel="stylesheet" href="review.css">
+</head>
+<body>
+  <div class="review-container">
+    <h1>口コミを投稿する</h1>
+
+    <form id="reviewForm">
+      <div class="form-group">
+        <label for="destination">投稿先の山を選択：</label>
+        <select id="destination" required>
+          <option value="">-- 山を選んでください --</option>
+          <option value="result-10">丸山</option>
+          <option value="result-11">旭岳</option>
+          <option value="result-12">藻岩山</option>
+          <option value="result-13">恵山</option>
+          <option value="result-14">ニセコアンヌプリ</option>
+          <option value="result-15">樽前山</option>
+          <option value="result-16">雌阿寒岳</option>
+          <option value="result-17">十勝岳</option>
+          <option value="result-18">トムラウシ山</option>
+          <option value="result-19">黒岳〜北鎮岳縦走</option>
+          <option value="result-20">ニぺソツ山</option>
+          <option value="result-21">幌尻岳</option>
+          <option value="result-22">カムイエクウチカウシ山</option>
+          <option value="result-23">日高山脈未踏峰エリア</option>
+          <option value="result-24">日高幌尻岳南西尾根（バリエーションルート）</option>
+          <option value="result-25">神威岳南西尾根ルート</option>
+        </select>
+      </div>
+
+      <div class="star-rating">
+        <label>評価：</label><br>
+        <input type="radio" name="rating" value="5" id="star5"><label for="star5">★</label>
+        <input type="radio" name="rating" value="4" id="star4"><label for="star4">★</label>
+        <input type="radio" name="rating" value="3" id="star3"><label for="star3">★</label>
+        <input type="radio" name="rating" value="2" id="star2"><label for="star2">★</label>
+        <input type="radio" name="rating" value="1" id="star1"><label for="star1">★</label>
+      </div>
+
+      <div class="form-group">
+        <label for="name">ニックネーム（省略可）</label>
+        <input type="text" id="name" name="name" placeholder="匿名可">
+      </div>
+
+      <div class="form-group">
+        <label for="comment">コメント</label>
+        <textarea id="comment" name="comment" placeholder="口コミ内容を入力してください" required></textarea>
+      </div>
+
+      <button type="submit">投稿する</button>
+    </form>
+
+    <p id="successMessage" style="display:none; color: green;">口コミが保存されました。</p>
+  </div>
+
+  <script src="review.js"></script>
+</body>
+</html>
