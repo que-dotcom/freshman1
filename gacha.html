@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title data-i18n="title">推し山ガチャ</title>
+  <link rel="stylesheet" href="gacha.css">
+  <script src="https://unpkg.com/i18next@22.4.9/i18next.min.js"></script>
+</head>
+<body>
+
+  <!-- 言語切り替えボタン -->
+  <div id="lang-switch">
+    <button onclick="changeLang('ja')">日本語</button>
+    <button onclick="changeLang('en')">English</button>
+  </div>
+
+  <div class="container">
+    <h1 data-i18n="header">ガチャガチャ</h1>
+    <button id="gacha-button" data-i18n="button">回す！</button>
+    <div id="result">ここに結果が表示されます</div>
+  </div>
+
+  <div id="link"></div>
+
+  <div class="home-button">
+    <a href="else.html" data-i18n="home">ホームページを見る</a>
+  </div>
+
+  <script src="gacha.js"></script>
+</body>
+</html>

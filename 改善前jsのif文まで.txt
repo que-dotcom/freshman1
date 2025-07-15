@@ -1,0 +1,166 @@
+const character = document.getElementById("character");//HTMLのcharacter要素を取得しcharacter変数に格納,以下のコードはインデントによって含まれることにならないので注意
+    let posX = 10;//キャラクターのX軸の初期位置を設定
+    let posY = 10;//キャラクターのy軸の初期位置を設定
+    const blockButtons = document.querySelectorAll(".block-button");// NodeListであり、HTML上の.block-buttonクラスが付いたすべての要素をまとめた「配列のようなリスト」,CSSはクラスのスタイル定義のため直接関係なし
+    const programArea = document.getElementById("programArea");//HTMLのprogramArea要素を取得しprogramArea変数に格納,ブロックをドラッグ＆ドロップする対象領域
+    const trash = document.getElementById("trash");//HTMLのtrash要素を取得しtrash変数に格納,ブロックを削除するためのゴミ箱を担う役割
+
+    // ドラッグ＆ドロップのイベントリスナーを設定,テキストの保持、HtMLの保持、ドラッグ中のスタイル適用
+    blockButtons.forEach(button => {//forEachは配列やNodeListの各要素に対して関数を実行するメソッド,button =>はアロー関数で、.block-buttonをbuttonとし各要素を引数として受け取る
+      //アロー関数は、関数の短縮記法で、functionキーワードを省略できる,またアロー関数内のコードは実行または引数として受け取ることができる
+      button.addEventListener("dragstart", e => {//ドラッグ開始時のイベントリスナーを追加,buttonがドラッグされ始めたときに実行される
+        e.dataTransfer.setData("text/plain", button.innerText);// ドラッグされた要素のテキストをデータ転送オブジェクトに設定
+        e.dataTransfer.setData("html", button.outerHTML);// ドラッグされた要素のテキストとHTMLをデータ転送オブジェクトに設定
+        e.target.classList.add("dragging");//ボタンに .dragging というCSSクラスをつけることで、ドラッグ中のスタイルを適用
+      });
+
+      // ドラッグ終了時のイベントリスナーを追加,cssのdraggingクラスを削除するための処理
+      button.addEventListener("dragend", e => {// ドラッグが終了したときに実行されるdragendイベントをアロー関数でeを引数に受け取る
+        e.target.classList.remove("dragging");// ドラッグ中のcssに対するdraggingクラスをremoveすることで、ドラッグ中のスタイルを解除
+      });
+    });
+
+    // ドラッグ＆ドロップのイベントリスナーを設定,ブロックを programArea に落とせるようにする
+    programArea.addEventListener("dragover", e => e.preventDefault());// programArea上でのdragoverイベントを防止,preventDefault()は、デフォルトの動作をキャンセルするメソッドつまり、ドロップを許可するような役割でdropのイベントを有効にするために必要
+    programArea.addEventListener("drop", handleDrop);//dropイベントは要素の上にドラッグしていたものを「ドロップ（落とす）」ときに発生,それをhandleDrop関数はドロップされたときに実行する関数名で以下のfunction handleDrop(e)で定義され処理を行う
+
+    // ゴミ箱のイベントリスナーを設定,ブロックをゴミ箱にドロップして削除できるようにする
+    trash.addEventListener("dragover", e => e.preventDefault());// ゴミ箱上でのdragoverイベントを防止,ゴミ箱にドロップできるようにするために必要
+    trash.addEventListener("drop", e => {// ゴミ箱にドロップされたときの処理
+      e.preventDefault();// デフォルトの動作をキャンセル,ここでのdefaultの動作は、ブラウザがドロップされた要素をそのまま表示することを防ぐ
+      const dragged = document.querySelector(".dragging");//.draggingクラスを持つ要素を取得,これはドラッグ中の要素を指す
+      if (dragged && dragged.parentElement !== document.body) {//dragged が存在しているか確認（nullじゃないか）,dragged の親要素が document.body ではないことを確認して、つまり、ドラッグ中の要素が programArea や他の場所にある場合にのみ真となる
+        dragged.remove();// ドラッグ中の要素を削除,remove()メソッドは、要素をDOM（画面）から削除するために使用される
+      }
+    });
+
+    // ドロップイベントの処理関数,ドロップされた要素の種類に応じて処理を行う,画面上のどこに落とされたかを判断する処理のはじまり部分
+    function handleDrop(e) {// ドロップイベントの処理関数
+  e.preventDefault();//ブラウザのデフォルトのドロップ処理（テキスト貼り付けなど）を無効化
+  const text = e.dataTransfer.getData("text/plain");// ドロップされた要素のテキストを取得,何を追加するか判断する
+  const dropTarget = e.target;//ドロップされた対象のHTML要素を取得する,どこに追加するか判断する
+
+  // 条件ブロックはprogramArea直下に追加
+  if (text.includes("もし（") && text.includes("）ならば")) {
+  const block = document.createElement("div");
+  block.classList.add("condition-block");
+
+  const label = document.createElement("div");
+  label.textContent = `❓ ${text}`; // 安全にテキストを挿入
+
+  const conditionSlot = document.createElement("div");
+  conditionSlot.classList.add("condition-slot");
+  conditionSlot.addEventListener('dragover', e => e.preventDefault());
+  conditionSlot.addEventListener('drop', handleConditionDrop);
+
+  const nestedSlot = document.createElement("div");
+  nestedSlot.classList.add("nested-slot");
+  nestedSlot.addEventListener('dragover', e => e.preventDefault());
+  nestedSlot.addEventListener('drop', handleNestedDrop);
+
+  block.appendChild(label);
+  block.appendChild(conditionSlot);
+  block.appendChild(nestedSlot);
+
+  programArea.appendChild(block);
+  // return; を書くなら、ここ以降の処理がないことを確認
+}
+
+
+  const block = createBlock(text);
+
+  // ❗ drop先が nested-slot や programArea など適切な場所なら追加
+  if (
+    dropTarget.classList.contains("nested-slot") ||
+    dropTarget.classList.contains("program-panel")
+  ) {
+    dropTarget.appendChild(block);
+  } else {
+    // デフォルト fallback: programArea に追加（たとえば span などに落とされた場合）
+    programArea.appendChild(block);
+  }
+}
+
+
+    function handleNestedDrop(e) {
+      e.preventDefault();
+      const text = e.dataTransfer.getData("text/plain");
+      const block = createBlock(text);
+      e.target.appendChild(block);
+    }
+
+    function handleConditionDrop(e) {
+      e.preventDefault();
+      const text = e.dataTransfer.getData("text/plain");
+      const block = createBlock(text);
+      e.target.innerHTML = "";
+      e.target.appendChild(block);
+    }
+
+    function createBlock(text) {
+      const div = document.createElement("div");
+      div.innerText = text;
+      div.classList.add("block-button");
+      if (text === "いま向かう方が何もない" || text === "端っこにいる") {
+        div.classList.add("condition-button");
+      }
+      div.setAttribute("draggable", "true");
+      div.addEventListener("dragstart", e => {
+        e.dataTransfer.setData("text/plain", div.innerText);
+        e.target.classList.add("dragging");
+      });
+      div.addEventListener("dragend", e => {
+        e.target.classList.remove("dragging");
+      });
+      return div;
+    }
+
+    async function runProgram() {
+      const children = Array.from(programArea.children);
+
+      for (const block of children) {
+        if (block.classList.contains("block-button")) {
+          const cmd = block.innerText;
+          await executeCommand(cmd);
+        } else if (block.classList.contains("condition-block")) {
+          const condition = block.querySelector(".condition-slot .block-button")?.innerText || "";
+          const body = block.querySelector(".nested-slot");
+
+          let conditionResult = false;
+          if (condition === "いま向かう方が何もない") {
+            conditionResult = true; // 仮判定
+          } else if (condition === "端っこにいる") {
+            conditionResult = (posX <= 10 || posX >= 310 || posY <= 10 || posY >= 310);
+          }
+
+          if (conditionResult && body) {
+            const commands = Array.from(body.children);
+            for (const cmdBlock of commands) {
+              await executeCommand(cmdBlock.innerText);
+            }
+          }
+        }
+      }
+    }
+
+    async function executeCommand(cmd) {
+      if (cmd.includes("スタート")) {
+        posX = 10;
+        posY = 10;
+        moveCharacter();
+        await wait(500);
+      } else if (cmd.includes("前に進む")) {
+        posX += 50;
+        moveCharacter();
+        await wait(500);
+      }
+    }
+
+    function moveCharacter() {
+      character.style.left = posX + "px";
+      character.style.top = posY + "px";
+    }
+
+    function wait(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }

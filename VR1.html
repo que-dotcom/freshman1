@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>VR山ビュー（安定3枚切替版）</title>
+  <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+  <style>
+    body, html { margin: 0; height: 100%; }
+  </style>
+</head>
+<body>
+  <a-scene>
+    <!-- 背景1: 海沿いの街 -->
+    <a-sky id="sky"
+      src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/sechelt.jpg"
+      rotation="0 -130 0"></a-sky>
+
+    <!-- カメラ＆カーソル -->
+    <a-entity position="0 1.6 0">
+      <a-camera wasd-controls look-controls>
+        <a-cursor
+          fuse="true" fuse-timeout="500"
+          geometry="primitive:ring; radiusInner:0.02; radiusOuter:0.03"
+          material="color:white;shader:flat">
+        </a-cursor>
+      </a-camera>
+    </a-entity>
+
+    <!-- サムネイル切替パネル -->
+    <a-entity id="menu" position="0 1.5 -3">
+      <!-- 海沿いビュー -->
+      <a-plane class="thumb" position="-2 0 0"
+        material="shader: flat; src: https://cdn.aframe.io/360-image-gallery-boilerplate/img/sechelt.jpg"
+        width="1.5" height="1"
+        data-src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/sechelt.jpg">
+      </a-plane>
+
+      <!-- 都市山景ビュー -->
+      <a-plane class="thumb" position="0 0 0"
+        material="shader: flat; src: https://cdn.aframe.io/360-image-gallery-boilerplate/img/city.jpg"
+        width="1.5" height="1"
+        data-src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/city.jpg">
+      </a-plane>
+
+      <!-- キューブ山景ビュー -->
+      <a-plane class="thumb" position="2 0 0"
+        material="shader: flat; src: https://cdn.aframe.io/360-image-gallery-boilerplate/img/cubes.jpg"
+        width="1.5" height="1"
+        data-src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/cubes.jpg">
+      </a-plane>
+    </a-entity>
+
+    <a-light type="ambient" intensity="1"></a-light>
+  </a-scene>
+
+  <script>
+    // 背景画像の切り替え処理
+    document.querySelectorAll('.thumb').forEach(el => {
+      el.addEventListener('click', () => {
+        const src = el.getAttribute('data-src');
+        document.getElementById('sky').setAttribute('src', src);
+      });
+    });
+  </script>
+</body>
+</html>

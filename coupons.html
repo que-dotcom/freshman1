@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="coupons.css" />
+  <title data-i18n="title">登頂でクーポンGET</title>
+  <script src="https://unpkg.com/i18next@21.6.16/i18next.min.js"></script>
+  <script src="https://unpkg.com/i18next-browser-languagedetector@6.1.4/i18nextBrowserLanguageDetector.min.js"></script>
+  <script src="https://unpkg.com/jquery@3.6.0/dist/jquery.min.js"></script>
+  <script src="https://unpkg.com/jquery-i18next@1.2.1/dist/umd/jquery-i18next.min.js"></script>
+</head>
+<body>
+  <div class="lang-switcher">
+    <button onclick="changeLng('ja')">日本語</button>
+    <button onclick="changeLng('en')">English</button>
+  </div>
+
+  <h1 data-i18n="heading">登頂でクーポンGET！</h1>
+  <p data-i18n="instruction">登頂した山を選択してください：</p>
+
+  <select id="mountainSelect"></select>
+  <button onclick="generateCoupon()" data-i18n="submit">登頂報告</button>
+
+  <div id="couponBox" class="coupon"></div>
+  <p id="locationInfo"></p>
+  <iframe id="map" loading="lazy" allowfullscreen></iframe>
+
+  <div class="home-button">
+    <a href="else.html" data-i18n="home">ホームページを見る</a>
+  </div>
+
+  <script>
+    const mountainList = [
+      { ja: "円山旭岳", en: "Maruyama-Asahidake" },
+      { ja: "藻岩山", en: "Moiwa-yama" },
+      { ja: "恵山", en: "Esan" },
+      { ja: "ニセコアンヌプリ", en: "Niseko Annupuri" },
+      { ja: "樽前山", en: "Tarumae-zan" },
+      { ja: "雌阿寒岳", en: "Meakan-dake" },
+      { ja: "十勝岳", en: "Tokachi-dake" },
+      { ja: "トムラウシ山", en: "Tomuraushi-yama" },
+      { ja: "黒岳〜北鎮岳縦走", en: "Kuro-dake to Hokkaidake Traverse" },
+      { ja: "ニぺソツ山", en: "Nipesotsu-yama" },
+      { ja: "幌尻岳", en: "Poroshiri-dake" },
+      { ja: "カムイエクウチカウシ山", en: "Kamui-e-kuuchikau-shi-yama" },
+      { ja: "日高山脈未踏峰エリア", en: "Unclimbed Hidaka Mountains Area" },
+      { ja: "日高幌尻岳南西尾根", en: "Southwest Ridge of Hidaka Poroshiri-dake" },
+      { ja: "神威岳南西尾根", en: "Southwest Ridge of Kamui-dake" }
+    ];
+
+    function populateMountains() {
+      const select = document.getElementById("mountainSelect");
+      select.innerHTML = `<option value="">-- ${i18next.t("select_prompt")} --</option>`;
+      mountainList.forEach(m => {
+        const name = i18next.language === "en" ? m.en : m.ja;
+        const option = document.createElement("option");
+        option.value = m.ja;
+        option.textContent = name;
+        select.appendChild(option);
+      });
+    }
+
+    function generateCoupon() {
+      const select = document.getElementById("mountainSelect");
+      const mountain = select.value;
+      const couponBox = document.getElementById("couponBox");
+      const locationInfo = document.getElementById("locationInfo").textContent;
+
+      if (!mountain) {
+        alert(i18next.t("alert.select_mountain"));
+        return;
+      }
+
+      if (locationInfo.includes(mountain)) {
+        const timestamp = Date.now().toString().slice(-5);
+        const couponCode = `${mountain.replace(/[^\w]/g, "").toUpperCase()}-${timestamp}`;
+        couponBox.innerHTML = `<strong>${mountain}</strong> ${i18next.t("message.success")}<br>${i18next.t("message.coupon")}: <code>${couponCode}</code>`;
+      } else {
+        couponBox.innerHTML = `<strong>${mountain}</strong> ${i18next.t("message.fail")}`;
+      }
+
+      couponBox.style.display = "block";
+    }
+
+    function detectLocation() {
+      if (!navigator.geolocation) return;
+
+      navigator.geolocation.getCurrentPosition(async pos => {
+        const lat = pos.coords.latitude;
+        const lon = pos.coords.longitude;
+
+        // 表示用のGoogleマップ
+        const map = document.getElementById("map");
+        map.src = `https://maps.google.com/maps?q=${lat},${lon}&z=14&output=embed`;
+
+        // 地名取得（Nominatim API）
+        const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}`);
+        const data = await response.json();
+        const locationText = data.display_name;
+        document.getElementById("locationInfo").textContent = `${i18next.t("location.detected")}: ${locationText}`;
+      }, err => {
+        console.warn("位置情報エラー", err);
+      });
+    }
+
+    // i18next 初期化
+    i18next
+      .use(i18nextBrowserLanguageDetector)
+      .init({
+        fallbackLng: "ja",
+        resources: {
+          ja: {
+            translation: {
+              title: "登頂でクーポンGET",
+              heading: "登頂でクーポンGET！",
+              instruction: "登頂した山を選択してください：",
+              select_prompt: "山を選んでください",
+              submit: "登頂報告",
+              home: "ホームページを見る",
+              alert: {
+                select_mountain: "山を選んでください！"
+              },
+              message: {
+                success: "の登頂を確認しました！",
+                coupon: "クーポンコード",
+                fail: "のクーポン取得に失敗しました。現在地情報と一致しませんでした。"
+              },
+              location: {
+                detected: "現在地"
+              }
+            }
+          },
+          en: {
+            translation: {
+              title: "Get a Coupon for Climbing!",
+              heading: "Get a Coupon for Climbing!",
+              instruction: "Please select the mountain you climbed:",
+              select_prompt: "Select a mountain",
+              submit: "Submit",
+              home: "Go to Homepage",
+              alert: {
+                select_mountain: "Please select a mountain!"
+              },
+              message: {
+                success: " summit confirmed!",
+                coupon: "Coupon Code",
+                fail: " could not be verified. Your current location did not match."
+              },
+              location: {
+                detected: "Current Location"
+              }
+            }
+          }
+        }
+      }, function () {
+        jqueryI18next.init(i18next, $, { useOptionsAttr: true });
+        $("body").localize();
+        populateMountains();
+        detectLocation();
+      });
+
+    function changeLng(lng) {
+      i18next.changeLanguage(lng, () => {
+        $("body").localize();
+        populateMountains();
+      });
+    }
+  </script>
+</body>
+</html>

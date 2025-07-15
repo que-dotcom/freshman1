@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>気軽に登山web</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      background: #fff9e6;
+      color: #333;
+    }
+
+    header {
+      background-color: #f1c40f;
+      color: #fff;
+      padding: 1em;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    header h1 {
+      margin: 0;
+    }
+
+    main {
+      display: flex;
+      justify-content: center;
+      gap: 2em;
+      padding: 2em;
+      flex-wrap: wrap;
+    }
+
+    .card {
+      background: #fffbea;
+      border: 2px solid #f39c12;
+      border-radius: 12px;
+      padding: 1.5em;
+      width: 300px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+    }
+
+    .card:hover {
+      transform: scale(1.03);
+    }
+
+    .card h2 {
+      color: #d35400;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 1em;
+      padding: 0.6em 1.2em;
+      background-color: #f1c40f;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #f39c12;
+    }
+
+    .home-button {
+      display: flex;
+      justify-content: center;
+      margin-top: 40px;
+    }
+
+    .home-button a {
+      background-color: #c7c7c7;
+      color: #E0E0E0;
+      text-decoration: none;
+      padding: 15px 30px;
+      border-radius: 30px;
+      font-size: 1.2rem;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: background-color 0.3s ease;
+    }
+
+    .home-button a:hover {
+      background-color: #2E2E2E;
+    }
+
+    #lang-switch {
+      text-align: center;
+      margin-top: 1em;
+    }
+
+    #lang-switch button {
+      margin: 0 10px;
+      padding: 6px 14px;
+      font-size: 1em;
+      border: none;
+      border-radius: 6px;
+      background-color: #f39c12;
+      color: white;
+      cursor: pointer;
+    }
+
+    #lang-switch button:hover {
+      background-color: #e67e22;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1 data-i18n="title">登山体験ポータル</h1>
+    <p data-i18n="desc">2つの体験を選んでください</p>
+  </header>
+
+  <div id="lang-switch">
+    <button onclick="changeLang('ja')">日本語</button>
+    <button onclick="changeLang('en')">English</button>
+  </div>
+
+  <main>
+    <section class="card">
+      <h2 data-i18n="card1Title">ファストパッキング</h2>
+      <p data-i18n="card1Desc">難易度の高い登山を気軽に行ってみましょう。</p>
+      <a href="fp.html" class="btn" data-i18n="card1Btn">見てみる</a>
+    </section>
+
+    <section class="card">
+      <h2 data-i18n="card2Title">荷物をドローン委託</h2>
+      <p data-i18n="card2Desc">登山を気軽に、登頂先で本格的に。</p>
+      <a href="dr.html" class="btn" data-i18n="card2Btn">確認する</a>
+    </section>
+  </main>
+
+  <div class="home-button">
+    <a href="else.html" data-i18n="home">ホームページを見る</a>
+  </div>
+
+  <!-- i18next CDN -->
+  <script src="https://unpkg.com/i18next@21.6.3/i18next.min.js"></script>
+
+  <script>
+    const resources = {
+      ja: {
+        translation: {
+          title: "登山体験ポータル",
+          desc: "2つの体験を選んでください",
+          card1Title: "ファストパッキング",
+          card1Desc: "難易度の高い登山を気軽に行ってみましょう。",
+          card1Btn: "見てみる",
+          card2Title: "荷物をドローン委託",
+          card2Desc: "登山を気軽に、登頂先で本格的に。",
+          card2Btn: "確認する",
+          home: "ホームページを見る"
+        }
+      },
+      en: {
+        translation: {
+          title: "Mountain Experience Portal",
+          desc: "Choose one of two experiences",
+          card1Title: "Fastpacking",
+          card1Desc: "Try challenging mountain hikes with ease.",
+          card1Btn: "View",
+          card2Title: "Drone-Assisted Gear Delivery",
+          card2Desc: "Climb light and go full-scale at the summit.",
+          card2Btn: "Check",
+          home: "Go to Homepage"
+        }
+      }
+    };
+
+    i18next.init({
+      lng: 'ja',
+      debug: false,
+      resources
+    }, function(err, t) {
+      updateContent();
+    });
+
+    function changeLang(lang) {
+      i18next.changeLanguage(lang, updateContent);
+    }
+
+    function updateContent() {
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        el.innerHTML = i18next.t(key);
+      });
+    }
+  </script>
+
+</body>
+</html>

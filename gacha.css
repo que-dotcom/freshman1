@@ -1,0 +1,59 @@
+body {
+  font-family: sans-serif;
+  text-align: center;
+  background: #fefbd8;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  margin-top: 100px;
+}
+
+h1 {
+  font-size: 2.5em;
+  color: #ff6f00;
+}
+
+#gacha-button {
+  padding: 1em 2em;
+  font-size: 1.2em;
+  background: #ff8a65;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+}
+
+#gacha-button:hover {
+  background: #ff7043;
+}
+
+#result {
+  margin-top: 40px;
+  font-size: 2em;
+  font-weight: bold;
+  color: #d84315;
+}
+
+    .home-button {
+      display: flex;
+      justify-content: center;
+      margin-top: 40px;
+    }
+
+    .home-button a {
+      background-color: #c7c7c7;
+      color: #E0E0E0;
+      text-decoration: none;
+      padding: 15px 30px;
+      border-radius: 30px;
+      font-size: 1.2rem;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: background-color 0.3s ease;
+    }
+
+    .home-button a:hover {
+      background-color: #2E2E2E;
+    }

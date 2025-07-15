@@ -85,6 +85,27 @@
       from { opacity: 0; transform: translateY(-5px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
+        .home-button {
+      display: flex;
+      justify-content: center;
+      margin-top: 40px;
+    }
+
+    .home-button a {
+      background-color: #c7c7c7;
+      color: #E0E0E0;
+      text-decoration: none;
+      padding: 15px 30px;
+      border-radius: 30px;
+      font-size: 1.2rem;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: background-color 0.3s ease;
+    }
+
+    .home-button a:hover {
+      background-color: #2E2E2E;
+    }
   </style>
 </head>
 <body>
@@ -175,6 +196,9 @@
   <button onclick="changeLang('en')">English</button>
 </div>
 
+<div class="home-button">
+    <a href="else.html" data-i18n="ホームページを見る">ホームページを見る</a>
+  </div>
 <script>
   function toggleDetails(id) {
     const detail = document.getElementById(id);
@@ -221,7 +245,8 @@
         "位置情報が取得できませんでした。": "Could not get location.",
         "このブラウザでは位置情報がサポートされていません。": "This browser does not support geolocation.",
         "緯度: ": "Latitude: ",
-        "経度: ": "Longitude: "
+        "経度: ": "Longitude: ",
+        "ホームページを見る": "Go to Homepage"
       }
     }
   };

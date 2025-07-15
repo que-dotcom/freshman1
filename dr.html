@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>ドローン山追尾シミュレーション</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/i18next@23.6.16/i18next.min.js"></script>
+  <script src="https://unpkg.com/i18next-browser-languagedetector@7.1.0/i18nextBrowserLanguageDetector.min.js"></script>
+  <script src="https://unpkg.com/i18next-http-backend@2.2.0/i18nextHttpBackend.min.js"></script>
+  <style>
+    body, html {
+      margin: 0;
+      height: 100%;
+      font-family: sans-serif;
+    }
+    #map {
+      height: calc(100% - 180px);
+      width: 100%;
+    }
+    #controls {
+      padding: 10px;
+      background-color: #fefbea;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    select, button {
+      padding: 10px;
+      font-size: 1em;
+      margin-right: 10px;
+    }
+    #lang-switch {
+      padding: 10px;
+      text-align: center;
+      background: #fefbea;
+    }
+    #lang-switch button {
+      margin: 0 5px;
+      padding: 8px 16px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+
+      .home-button {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.home-button a {
+  background-color: #c7c7c7; /* 薄めグレーのボタン */
+  color: #E0E0E0;
+  text-decoration: none;
+  padding: 15px 30px;
+  border-radius: 30px;
+  font-size: 1.2rem;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: background-color 0.3s ease;
+}
+
+.home-button a:hover {
+  background-color: #2E2E2E; /* ホバー時に濃いグレー */
+}
+  </style>
+</head>
+<body>
+
+<div id="controls">
+  <label id="labelSelect" for="mountainSelect" data-i18n="selectLabel">山を選択：</label>
+  <select id="mountainSelect"></select>
+  <button id="connect-btn" data-i18n="connect">ドローン接続（追尾）</button>
+</div>
+
+<!--<div id="lang-switch">
+  <button onclick="changeLang('ja')">日本語</button>
+  <button onclick="changeLang('en')">English</button>
+</div>-->
+
+<div id="map"></div>
+
+<div class="home-button">
+    <a href="else.html" data-i18n="home">ホームページを見る</a>
+  </div>
+<script>
+const mountains = [
+  { name_ja: "円山", name_en: "Maruyama", lat: 43.0517, lng: 141.3128 },
+  { name_ja: "旭岳", name_en: "Mt. Asahi", lat: 43.6638, lng: 142.8544 },
+  { name_ja: "藻岩山", name_en: "Mt. Moiwa", lat: 43.0175, lng: 141.3264 },
+  { name_ja: "恵山", name_en: "Mt. Esan", lat: 41.7544, lng: 141.1061 },
+  { name_ja: "ニセコアンヌプリ", name_en: "Niseko Annupuri", lat: 42.8655, lng: 140.6752 },
+  { name_ja: "樽前山", name_en: "Mt. Tarumae", lat: 42.6229, lng: 141.3826 },
+  { name_ja: "雌阿寒岳", name_en: "Mt. Meakan", lat: 43.3856, lng: 144.0225 },
+  { name_ja: "十勝岳", name_en: "Mt. Tokachi", lat: 43.4197, lng: 142.6858 },
+  { name_ja: "トムラウシ山", name_en: "Mt. Tomuraushi", lat: 43.4600, lng: 142.8444 },
+  { name_ja: "黒岳～北鎮岳", name_en: "Mt. Kurodake to Hokuchindake", lat: 43.7072, lng: 142.9472 },
+  { name_ja: "二ぺソツ山", name_en: "Mt. Nipesotsu", lat: 43.4639, lng: 143.0889 },
+  { name_ja: "幌尻岳", name_en: "Mt. Poroshiri", lat: 42.6289, lng: 142.6483 },
+  { name_ja: "カムイエクウチカウシ山", name_en: "Mt. Kamui", lat: 42.6633, lng: 142.8014 },
+  { name_ja: "日高山脈", name_en: "Hidaka Mountains", lat: 42.7500, lng: 142.7500 },
+  { name_ja: "日高幌尻岳", name_en: "Mt. Hidaka Poroshiri", lat: 42.6445, lng: 142.6442 },
+  { name_ja: "神威岳", name_en: "Mt. Kamui-dake", lat: 42.6448, lng: 142.8767 }
+];
+
+let currentLang = 'ja';
+
+function renderMountains() {
+  const select = document.getElementById("mountainSelect");
+  select.innerHTML = '';
+  const defaultOption = document.createElement("option");
+  defaultOption.value = "";
+  defaultOption.textContent = currentLang === 'ja' ? "-- 選択 --" : "-- Select --";
+  select.appendChild(defaultOption);
+  mountains.forEach(m => {
+    const opt = document.createElement("option");
+    opt.value = `${m.lat},${m.lng}`;
+    opt.textContent = currentLang === 'ja' ? m.name_ja : m.name_en;
+    select.appendChild(opt);
+  });
+}
+
+let map, userMarker, droneMarker, targetMarker;
+let droneLatLng = null;
+let targetLatLng = null;
+
+function initMap(lat, lng) {
+  map = L.map('map').setView([lat, lng], 10);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors'
+  }).addTo(map);
+  userMarker = L.marker([lat, lng]).addTo(map).bindPopup("📍 現在地").openPopup();
+  droneMarker = L.marker([lat, lng], {
+    icon: L.icon({
+      iconUrl: "https://cdn-icons-png.flaticon.com/512/726/726476.png",
+      iconSize: [40, 40], iconAnchor: [20, 20]
+    })
+  }).addTo(map).bindPopup("🛸 ドローン");
+  droneLatLng = L.latLng(lat, lng);
+}
+
+function animateDrone() {
+  if (!targetLatLng) return;
+  const steps = 400;
+  let i = 0;
+  const latStep = (targetLatLng.lat - droneLatLng.lat) / steps;
+  const lngStep = (targetLatLng.lng - droneLatLng.lng) / steps;
+  const interval = setInterval(() => {
+    if (i >= steps) return clearInterval(interval);
+    droneLatLng = L.latLng(droneLatLng.lat + latStep, droneLatLng.lng + lngStep);
+    droneMarker.setLatLng(droneLatLng);
+    i++;
+  }, 100);
+
+  if (targetMarker) targetMarker.remove();
+  targetMarker = L.marker([targetLatLng.lat, targetLatLng.lng])
+    .addTo(map).bindPopup("🎯 目的地").openPopup();
+}
+
+navigator.geolocation.getCurrentPosition(pos => {
+  initMap(pos.coords.latitude, pos.coords.longitude);
+  renderMountains();
+}, () => {
+  alert("現在地を取得できませんでした。札幌に初期化します。");
+  initMap(43.06, 141.34);
+  renderMountains();
+});
+
+document.getElementById("connect-btn").addEventListener("click", () => {
+  const selected = document.getElementById("mountainSelect").value;
+  if (!selected) return alert(currentLang === 'ja' ? "山を選択してください。" : "Please select a mountain.");
+  const [lat, lng] = selected.split(',').map(Number);
+  targetLatLng = { lat, lng };
+  animateDrone();
+});
+
+function changeLang(lng) {
+  currentLang = lng;
+  i18next.changeLanguage(lng);
+  renderMountains();
+}
+
+function updateTexts() {
+  document.title = i18next.t("title");
+  document.getElementById("labelSelect").innerText = i18next.t("selectLabel");
+  document.getElementById("connect-btn").innerText = i18next.t("connect");
+}
+
+i18next.init({
+  lng: 'ja',
+  resources: {
+    ja: {
+      translation: {
+        title: "ドローン山追尾シミュレーション",
+        selectLabel: "山を選択：",
+        connect: "ドローン接続（追尾）"
+      }
+    },
+    en: {
+      translation: {
+        title: "Drone Mountain Tracking Simulation",
+        selectLabel: "Select Mountain:",
+        connect: "Connect Drone (Track)"
+      }
+    }
+  }
+}, function() {
+  updateTexts();
+  renderMountains();
+});
+
+i18next.on('languageChanged', () => {
+  updateTexts();
+});
+</script>
+
+</body>
+</html>

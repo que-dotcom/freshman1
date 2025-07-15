@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>ファストパッキングとは？</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #fefbea;
+      color: #333;
+    }
+    header {
+      background-color: #f1c40f;
+      color: white;
+      padding: 1.5em;
+      text-align: center;
+    }
+    .section {
+      padding: 2em;
+      max-width: 1000px;
+      margin: auto;
+    }
+    .section h2 {
+      color: #d35400;
+      border-bottom: 2px solid #f39c12;
+      padding-bottom: 0.3em;
+    }
+    .image-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1em;
+      justify-content: center;
+      margin-top: 1em;
+    }
+    .image-grid img {
+      width: 100%;
+      max-width: 300px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .card {
+      background: #fff9dc;
+      padding: 1.5em;
+      border-radius: 10px;
+      margin-top: 1.5em;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .home-button {
+      display: flex;
+      justify-content: center;
+      margin-top: 40px;
+    }
+    .home-button a {
+      background-color: #c7c7c7;
+      color: #E0E0E0;
+      text-decoration: none;
+      padding: 15px 30px;
+      border-radius: 30px;
+      font-size: 1.2rem;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: background-color 0.3s ease;
+    }
+    .home-button a:hover {
+      background-color: #2E2E2E;
+    }
+    #lang-switch {
+      text-align: center;
+      margin: 20px;
+    }
+    #lang-switch button {
+      padding: 10px 20px;
+      margin: 0 5px;
+      background-color: #f1c40f;
+      border: none;
+      color: white;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #lang-switch button:hover {
+      background-color: #f39c12;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="lang-switch">
+    <button onclick="changeLang('ja')">日本語</button>
+    <button onclick="changeLang('en')">English</button>
+  </div>
+
+  <header>
+    <h1 data-i18n="title">ファストパッキングとは？</h1>
+    <p data-i18n="subtitle">軽量で速く山を縦走する、新しい登山スタイル</p>
+  </header>
+
+  <div class="section">
+    <h2 data-i18n="section.overview">ファストパッキングの概要</h2>
+    <div class="card">
+      <p data-i18n="overview.text"></p>
+    </div>
+
+    <h2 data-i18n="section.images">補充イメージ</h2>
+    <div class="image-grid">
+      <img src="https://tse3.mm.bing.net/th/id/OIP.TKoI6w1-kwO4nL9K3ywqEQHaJb" alt="Fastpacking 1">
+      <img src="img_2373-768x1024.jpg" alt="Fastpacking 2">
+      <img src="https://tse1.mm.bing.net/th/id/OIP.rqysqjC3skLLEh0AxHbQpQHaFY" alt="Fastpacking 3">
+    </div>
+
+    <h2 data-i18n="section.equipment">必須な装備</h2>
+    <div class="card">
+      <ul id="equipment-list"></ul>
+    </div>
+
+    <h2 data-i18n="section.benefits">メリット</h2>
+    <div class="card">
+      <ul id="benefits-list"></ul>
+    </div>
+  </div>
+
+  <div class="home-button">
+    <a href="else.html" data-i18n="home">ホームページを見る</a>
+  </div>
+
+  <script src="https://unpkg.com/i18next@21.6.16/i18next.min.js"></script>
+  <script>
+    const resources = {
+      ja: {
+        translation: {
+          title: "ファストパッキングとは？",
+          subtitle: "軽量で速く山を縦走する、新しい登山スタイル",
+          "section.overview": "ファストパッキングの概要",
+          "overview.text": "トレイルランニングとウルトラライトバックパッキングを融合させた登山スタイルです。装備を最小限に抑え、走るように歩きながら山を縦走します。",
+          "section.images": "補充イメージ",
+          "section.equipment": "必須な装備",
+          "section.benefits": "メリット",
+          "equipment.list": [
+            "20〜35Lのバックパック",
+            "軽重テント / タープ",
+            "コンパクトな食料と水",
+            "第一エイドキット",
+            "GPS / 地図のナビゲーション"
+          ],
+          "benefits.list": [
+            "行動範囲が広がる",
+            "装備が軽いので行動が準備できる",
+            "短時間で深い自然へ"
+          ],
+          "home": "ホームページを見る"
+        }
+      },
+      en: {
+        translation: {
+          title: "What is Fastpacking?",
+          subtitle: "A new way of hiking light and fast",
+          "section.overview": "Overview of Fastpacking",
+          "overview.text": "Fastpacking combines trail running and ultralight backpacking. Carrying minimal gear, hikers move swiftly through mountains.",
+          "section.images": "Image Examples",
+          "section.equipment": "Essential Equipment",
+          "section.benefits": "Benefits",
+          "equipment.list": [
+            "20–35L backpack",
+            "Lightweight tent / tarp",
+            "Compact food and water",
+            "First-aid kit",
+            "GPS / map navigation"
+          ],
+          "benefits.list": [
+            "Expanded range of activity",
+            "Light gear improves mobility",
+            "Reach remote nature quickly"
+          ],
+          "home": "Go to Homepage"
+        }
+      }
+    };
+
+    i18next.init({
+      lng: 'ja',
+      debug: false,
+      resources
+    }, function(err, t) {
+      updateContent();
+    });
+
+    function changeLang(lang) {
+      i18next.changeLanguage(lang, updateContent);
+    }
+
+    function updateContent() {
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (key && !key.includes('.list')) {
+          el.textContent = i18next.t(key);
+        }
+      });
+
+      // リストの手動生成（配列対応）
+      const eqList = i18next.t('equipment.list', { returnObjects: true });
+      const eqUl = document.getElementById('equipment-list');
+      eqUl.innerHTML = eqList.map(item => `<li>${item}</li>`).join('');
+
+      const beList = i18next.t('benefits.list', { returnObjects: true });
+      const beUl = document.getElementById('benefits-list');
+      beUl.innerHTML = beList.map(item => `<li>${item}</li>`).join('');
+    }
+  </script>
+</body>
+</html>
